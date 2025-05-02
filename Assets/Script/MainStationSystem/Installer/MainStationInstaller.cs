@@ -8,7 +8,14 @@ namespace GameSystems.Shared.Interfaces.Installer
         public override IMainStation CreateSystem()
         {
             MainStationLevel MainStationLevel = new MainStationLevel();
-            MainStation = new MainStation(MainStationLevel);
+            MainStationStorage MainStationStorage = new MainStationStorage();
+            MainStationUpgrade mainStationUpgrade = new MainStationUpgrade(MainStationLevel, MainStationStorage);
+            MainStationShipStorage MainStationShipStorage = new MainStationShipStorage();
+            MainStation = new MainStation(
+                MainStationLevel, 
+                MainStationStorage, 
+                mainStationUpgrade,
+                MainStationShipStorage);
             return MainStation;
         }
     }

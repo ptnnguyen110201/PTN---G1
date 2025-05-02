@@ -1,7 +1,7 @@
+using System.Collections.Generic;
+
 public interface IMainStationLevel : ILevel 
 {
-    int RequiredResources { get; }
-    int CurrentResources { get; }
-
-    void AddResources(int amount);
+    Dictionary<string, int> UpgradeRequirements { get; }
+    int GetUpgradeRequiredMent(string ResourceType);
 }

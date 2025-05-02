@@ -4,19 +4,15 @@ using UnityEngine;
 
 public class MainStationLevel : IMainStationLevel
 {
-    public int RequiredResources { get; private set; } = 5;
-    public int CurrentResources { get; private set; } = 0;
     public int CurrentLevel { get; private set; } = 1;
-    public int MaxLevel { get; private set; } = 3;
+    public int MaxLevel { get; private set; } = 10;
 
-    public void AddResources(int amount)
+    public Dictionary<string, int> UpgradeRequirements { get; private set; } = new Dictionary<string, int>()
     {
-      
-        this.CurrentResources += amount;
-        if (this.CurrentResources < this.RequiredResources) return;
-        this.CurrentResources -= this.RequiredResources;
-        this.OnLevelUp();
-    }
+        {"Iron", 5 }
+        
+    };
+ 
     public void OnLevelUp()
     {
         if (this.IsMaxLevel()) return;
@@ -28,5 +24,9 @@ public class MainStationLevel : IMainStationLevel
         return false;
     }
 
-
+    public int GetUpgradeRequiredMent(string ResourceType)
+    {
+        if (!this.UpgradeRequirements.ContainsKey(ResourceType)) return 0;
+        return this.UpgradeRequirements[ResourceType];
+    }
 }
