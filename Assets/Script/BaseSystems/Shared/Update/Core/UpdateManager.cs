@@ -1,9 +1,10 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class UpdateManager : IUpdateManager
+
 {
+
     private readonly List<IUpdatable> updates = new();
     private readonly List<ILateUpdatable> lateUpdates = new();
     private readonly List<IFixedUpdatable> fixedUpdates = new();
@@ -27,7 +28,6 @@ public class UpdateManager : IUpdateManager
         for (int i = 0; i < this.updates.Count; i++)
             this.updates[i].OnUpdate(deltaTime);
     }
-
     public void LateUpdate()
     {
         float deltaTime = Time.deltaTime;

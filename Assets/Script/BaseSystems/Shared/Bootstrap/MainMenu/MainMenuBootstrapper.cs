@@ -1,7 +1,6 @@
 
 using GameSystems.MainStationSystem;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace ProjectName.Bootstrap
 {
@@ -10,7 +9,12 @@ namespace ProjectName.Bootstrap
         public void Initialize()
         {
             UpdateBootstrap.Initialize();
-            MainStationBootstrap.Initialize();
+
+            DIContainer DIContainer = new DIContainer();
+            GameContext.Instance.SetDIContainer(DIContainer);
+
+            MainStationBootstrap.Initialize(DIContainer);
+
         }
 
     }

@@ -1,11 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
+
 
 public class MainStationLevel : IMainStationLevel
 {
     public int CurrentLevel { get; private set; } = 1;
-    public int MaxLevel { get; private set; } = 10;
+    public int MaxLevel { get; private set; } = 1000;
 
     public Dictionary<string, int> UpgradeRequirements { get; private set; } = new Dictionary<string, int>()
     {
@@ -28,5 +28,16 @@ public class MainStationLevel : IMainStationLevel
     {
         if (!this.UpgradeRequirements.ContainsKey(ResourceType)) return 0;
         return this.UpgradeRequirements[ResourceType];
+    }
+
+    public void SetLevel(int CurrentLevel, int MaxLevel)
+    {
+        this.CurrentLevel = CurrentLevel;
+        this.MaxLevel = MaxLevel;
+    }
+
+    public void Initialize()
+    {
+      
     }
 }

@@ -10,10 +10,9 @@ namespace GameSystems.Shared.SystemBase
         {
             Instance = this.CreateSystem();
             Instance.Initialize();
- 
+
         }
 
         public abstract T CreateSystem();
     }
 }
-

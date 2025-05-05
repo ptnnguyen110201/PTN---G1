@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEngine;
 using GameSystems.Shared.Events;
 
 public class MainStationStorage : IMainStationStorage
@@ -10,16 +11,9 @@ public class MainStationStorage : IMainStationStorage
             this.ResourceMap[resourceType] = 0;
 
         this.ResourceMap[resourceType] += resourceCount;
+     
         EventManager.Invoke(EventKeys.OnResourceChanged, resourceType, this.ResourceMap[resourceType]);
     }
-
-    public int GetResourceCount(string resourceType)
-    {
-        if (!this.ResourceMap.ContainsKey(resourceType)) return 0;
-        return this.ResourceMap[resourceType];
-
-    }
-
     public void RemoveResource(string resourceType, int resourceCount)
     {
         if (!this.ResourceMap.ContainsKey(resourceType)) return;
@@ -27,4 +21,22 @@ public class MainStationStorage : IMainStationStorage
         this.ResourceMap[resourceType] -= resourceCount;
         EventManager.Invoke(EventKeys.OnResourceChanged, resourceType, this.ResourceMap[resourceType]);
     }
+
+
+    public int GetResourceCount(string resourceType)
+    {
+        if (!this.ResourceMap.ContainsKey(resourceType)) return 0;
+        return this.ResourceMap[resourceType];
+
+    }
+ 
+  
+    public Dictionary<string, int> ExportAll() => new(this.ResourceMap);
+    public void LoadFrom(Dictionary<string, int> ResourceMap) => this.ResourceMap = new (ResourceMap);
+   
+
+        
+      
+    
+
 }

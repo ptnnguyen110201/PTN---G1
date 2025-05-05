@@ -1,22 +1,21 @@
-using GameSystems.Shared.SystemBase;
+using GameSystems.Shared.Interfaces.Installer;
 
-namespace GameSystems.Shared.Interfaces.Installer 
+namespace GameSystems.MainStationSystem
 {
-    public class MainStationInstaller : BaseInstaller<IMainStation>
+    public class MainStationInstaller : GameSystemInstaller
     {
-        public static IMainStation MainStation { get; private set; }
-        public override IMainStation CreateSystem()
+
+        public override void Install(DIContainer container)
         {
-            MainStationLevel MainStationLevel = new MainStationLevel();
-            MainStationStorage MainStationStorage = new MainStationStorage();
-            MainStationUpgrade mainStationUpgrade = new MainStationUpgrade(MainStationLevel, MainStationStorage);
-            MainStationShipStorage MainStationShipStorage = new MainStationShipStorage();
-            MainStation = new MainStation(
-                MainStationLevel, 
-                MainStationStorage, 
-                mainStationUpgrade,
-                MainStationShipStorage);
-            return MainStation;
+            container.Bind<IMainStationLevel, MainStationLevel>();
+            container.Bind<IMainStationStorage, MainStationStorage>();
+            container.Bind<IMainStationUpgarde, MainStationUpgrade>();
+            container.Bind<IMainStationShipStorage, MainStationShipStorage>();
+            container.Bind<IMainStation, MainStation>();
+
+
+
+            
         }
     }
 }

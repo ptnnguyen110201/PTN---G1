@@ -4,6 +4,7 @@ namespace GameSystems.Shared.Interfaces.Installer
 {
     public class UpdateInstaller : BaseInstaller<IUpdateManager>
     {
+
         public static IUpdateManager UpdateManager { get; private set; }
         public override IUpdateManager CreateSystem()
         {
