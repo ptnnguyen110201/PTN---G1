@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Prefabs
+  m_EditorClassIdentifier: 
+  m_GroupName: Prefabs
+  m_GUID: ecae5b72250d97642b8071adcc16c079
+  m_SerializeEntries:
+  - m_GUID: b48aa109b0eb1f94ab691e38be8fe378
+    m_Address: Assets/Prefabs/Enemy/Enemy1.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ShipEnemy
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cf91903cb5ae0534b8ae9210b6763875
+    m_Address: Assets/Prefabs/Ship/ShipResource1
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ShipResource
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f9e0ddab7b0db6442802454cb45c2498
+    m_Address: Assets/Prefabs/Ship/ShipResource2
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ShipResource
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 5e56ed486630b3240848acf192d15545, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: aea4c0489ab457e4bbb44f8a00ba9c38, type: 2}
+    - {fileID: 11400000, guid: 5a202dd4234467b419012c0d742a6de5, type: 2}

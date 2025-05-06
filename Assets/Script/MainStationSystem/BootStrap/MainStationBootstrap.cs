@@ -8,10 +8,6 @@ namespace GameSystems.MainStationSystem
         {
             MainStationInstaller installer = new MainStationInstaller();
             installer.Install(DIContainer);
-
-            MainStation mainStation = DIContainer.Resolve<MainStation>();
-            mainStation.Initialize();
-
         }
     }
 }

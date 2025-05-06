@@ -2,7 +2,8 @@ public enum PrefabType
 {
     None,
     Station,
-    Ship,
+    ShipResource,
+    ShipEnemy,
     Planet,
     PlanetPoint,
 }

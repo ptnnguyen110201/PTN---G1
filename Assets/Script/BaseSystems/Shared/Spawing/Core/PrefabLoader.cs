@@ -1,56 +1,73 @@
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
+using UnityEngine.ResourceManagement.ResourceLocations;
 using UnityEngine;
+using System.Threading.Tasks;
 
 public class PrefabLoader : IPrefabLoader
 {
-    private const string BasePath = "Assets/Prefabs";
+    protected readonly Dictionary<PrefabCode, GameObject> CachedPrefabs = new();
+    public PrefabType PrefabType { get; private set; }
 
-    private readonly Dictionary<(PrefabType, PrefabCode), GameObject> cachedPrefabs = new();
-
-    public async Task<GameObject> LoadPrefabAsync(PrefabType prefabType, PrefabCode prefabCode)
+    public PrefabLoader(PrefabType prefabType)
     {
-        if (prefabType == PrefabType.None || prefabCode == PrefabCode.None)
-        {
-            Debug.LogError("Invalid prefab type or code.");
-            return null;
-        }
-
-        var key = (prefabType, prefabCode);
-        if (cachedPrefabs.TryGetValue(key, out var cached))
-        {
-            return cached;
-        }
-
-        string fullPath = $"{BasePath}/{prefabType}/{prefabCode}.prefab";
-        AsyncOperationHandle<GameObject> handle = Addressables.LoadAssetAsync<GameObject>(fullPath);
-        await handle.Task;
-
-        if (handle.Status == AsyncOperationStatus.Succeeded)
-        {
-            GameObject prefab = handle.Result;
-            cachedPrefabs[key] = prefab;
-            return prefab;
-        }
-        else
-        {
-            Debug.LogError($"Failed to load prefab at path: {fullPath}");
-            return null;
-        }
+        this.PrefabType = prefabType;
     }
 
-    public async Task PreloadAll()
+    public GameObject GetPrefab(PrefabCode prefabCode)
     {
-        await LoadPrefabAsync(PrefabType.Planet, PrefabCode.IronPlanet);
-        await LoadPrefabAsync(PrefabType.PlanetPoint, PrefabCode.PlanetSpawnPoint);
-        await LoadPrefabAsync(PrefabType.Station, PrefabCode.MainStation);
+        if (!this.CachedPrefabs.TryGetValue(prefabCode, out GameObject prefab))
+        {
+            Debug.LogError($"[PrefabLoader] Prefab not found in cache: {prefabCode}");
+            return null;
+        }
+
+        return prefab;
+    }
+
+    public Task LoadPrefabs(PrefabType prefabType)
+    {
+        string label = prefabType.ToString(); 
+        return this.LoadPrefabsByLabel(label);
+    }
+
+    public async Task LoadPrefabsByLabel(string label)
+    {
+        AsyncOperationHandle<IList<IResourceLocation>> handle =
+            Addressables.LoadResourceLocationsAsync(label, typeof(GameObject));
+
+        await handle.Task;
+
+        if (handle.Status != AsyncOperationStatus.Succeeded)
+        {
+            Debug.LogError($"[PrefabLoader] Failed to load label: {label}");
+            return;
+        }
+
+        Debug.Log($"[PrefabLoader] Found {handle.Result.Count} prefabs for label: {label}");
+
+        foreach (var location in handle.Result)
+        {
+            AsyncOperationHandle<GameObject> loadHandle = Addressables.LoadAssetAsync<GameObject>(location);
+            await loadHandle.Task;
+
+            if (loadHandle.Status == AsyncOperationStatus.Succeeded)
+            {
+                GameObject prefab = loadHandle.Result;
+                string name = prefab.name;
+
+                if (!System.Enum.TryParse(name, out PrefabCode prefabCode)) continue;
+
+                if (this.CachedPrefabs.ContainsKey(prefabCode)) continue;
+                this.CachedPrefabs[prefabCode] = prefab;
+
+            }
+        }
     }
 
     public void Initialize()
     {
-
-        _ = PreloadAll();
+        _ = this.LoadPrefabs(this.PrefabType);
     }
 }

@@ -14,7 +14,7 @@ namespace ProjectName.Bootstrap
             GameContext.Instance.SetDIContainer(DIContainer);
 
             MainStationBootstrap.Initialize(DIContainer);
-
+            ShipManagerBootstrap.Initialize(DIContainer);
         }
 
     }

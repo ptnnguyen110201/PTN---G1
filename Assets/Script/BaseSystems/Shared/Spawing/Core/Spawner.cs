@@ -1,99 +1,104 @@
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using UnityEngine;
 
-public class Spawner<T> where T : Component, IPoolable
+public class Spawner<T> : ISpawner<T> where T : Component, IPoolable
 {
     private readonly IPrefabLoader prefabLoader;
-    private readonly Dictionary<PrefabType, ObjectPool<T>> poolDictionary = new Dictionary<PrefabType, ObjectPool<T>>();
-    private readonly Dictionary<PrefabType, Transform> poolHolders = new Dictionary<PrefabType, Transform>();
+    private readonly Dictionary<PrefabCode, ObjectPool<T>> poolDictionary = new();
+    private readonly Dictionary<PrefabType, Transform> poolHolders = new();
+
     public Spawner(IPrefabLoader prefabLoader)
     {
         this.prefabLoader = prefabLoader;
     }
 
-    private Transform CreatePoolHolder(PrefabType prefabType)
+    private Transform CreatePoolHolder()
     {
-        if (this.poolHolders.ContainsKey(prefabType))
+        if (this.poolHolders.ContainsKey(this.prefabLoader.PrefabType))
         {
-            return this.poolHolders[prefabType];
+            return this.poolHolders[this.prefabLoader.PrefabType];
         }
 
-        GameObject poolHolderGO = new GameObject($"{prefabType}_PoolHolder");
+        GameObject poolHolderGO = new GameObject($"{this.prefabLoader.PrefabType}PoolHolder");
         Transform holderTransform = poolHolderGO.transform;
-        this.poolHolders.Add(prefabType, holderTransform);
+        this.poolHolders.Add(this.prefabLoader.PrefabType, holderTransform);
 
         return holderTransform;
     }
-    public async Task Preload(PrefabType prefabEnum, PrefabCode prefabCode, int preloadCount)
+
+    public void Preload(PrefabCode prefabCode, int preloadCount)
     {
-        if (!poolDictionary.ContainsKey(prefabEnum))
+        if (!this.poolDictionary.ContainsKey(prefabCode))
         {
-            GameObject prefabObject = await prefabLoader.LoadPrefabAsync(prefabEnum, prefabCode);
+            GameObject prefabObject = this.prefabLoader.GetPrefab(prefabCode);
             if (prefabObject == null)
             {
-                Debug.LogError($"Failed to preload prefab: {prefabEnum}");
+                Debug.LogError($"[Spawner] Failed to preload prefab: {prefabCode}");
                 return;
             }
 
             T prefab = prefabObject.GetComponent<T>();
             if (prefab == null)
             {
-                Debug.LogError($"Prefab {prefabEnum} does not have component {typeof(T)}");
+                Debug.LogError($"[Spawner] Prefab {prefabCode} does not have component {typeof(T)}");
                 return;
             }
 
-            Transform poolHolder = CreatePoolHolder(prefabEnum);
-            this.poolDictionary[prefabEnum] = new ObjectPool<T>(prefab, poolHolder);
+            Transform poolHolder = this.CreatePoolHolder();
+            this.poolDictionary[prefabCode] = new ObjectPool<T>(prefab, poolHolder);
         }
 
-        this.poolDictionary[prefabEnum].Preload(preloadCount);
+        this.poolDictionary[prefabCode].Preload(preloadCount);
     }
-    public async Task<T> Spawn(PrefabType prefabEnum, PrefabCode prefabCode, Vector3 position, Quaternion rotation)
+
+    public T Spawn(PrefabCode prefabCode, Vector3 position, Quaternion rotation)
     {
-        if (!this.poolDictionary.ContainsKey(prefabEnum))
+        if (!this.poolDictionary.ContainsKey(prefabCode))
         {
-            GameObject prefabObject = await prefabLoader.LoadPrefabAsync(prefabEnum, prefabCode);
+            GameObject prefabObject = this.prefabLoader.GetPrefab(prefabCode);
             if (prefabObject == null)
             {
-                Debug.LogError($"Failed to load prefab: {prefabEnum}");
+                Debug.LogError($"[Spawner] Failed to spawn prefab: {this.prefabLoader.PrefabType}");
                 return null;
             }
 
             T prefab = prefabObject.GetComponent<T>();
             if (prefab == null)
             {
-                Debug.LogError($"Prefab {prefabEnum} does not have component {typeof(T)}");
+                Debug.LogError($"[Spawner] Prefab {prefabCode} does not have component {typeof(T)}");
                 return null;
             }
 
-            Transform poolHolder = CreatePoolHolder(prefabEnum);
-            this.poolDictionary[prefabEnum] = new ObjectPool<T>(prefab, poolHolder);
+            Transform poolHolder = this.CreatePoolHolder();
+            this.poolDictionary[prefabCode] = new ObjectPool<T>(prefab, poolHolder);
         }
 
-        return this.poolDictionary[prefabEnum].Spawn(position, rotation);
+        return this.poolDictionary[prefabCode].Spawn(position, rotation);
     }
-    public List<GameObject> GetPooledObjects(PrefabType prefabType)
+
+    public void Despawn(PrefabCode prefabCode, T instance)
     {
-        if (this.poolHolders.TryGetValue(prefabType, out Transform holder))
+        if (!this.poolDictionary.ContainsKey(prefabCode)) return;
+        this.poolDictionary[prefabCode].Despawn(instance);
+    }
+
+    public List<GameObject> GetPooledObjects()
+    {
+        if (this.poolHolders.TryGetValue(this.prefabLoader.PrefabType, out Transform holder))
         {
-            List<GameObject> pooledObjects = new List<GameObject>();
+            List<GameObject> pooledObjects = new();
 
             foreach (Transform child in holder)
             {
                 pooledObjects.Add(child.gameObject);
             }
-
+   
             return pooledObjects;
         }
 
-        Debug.LogWarning($"No PoolHolder found for PrefabType: {prefabType}");
+        Debug.LogWarning($"[Spawner] No PoolHolder found for PrefabCode: {this.prefabLoader.PrefabType}");
         return new List<GameObject>();
     }
- 
-    public void Despawn(PrefabType prefabEnum, T instance)
-    {
-        if (!this.poolDictionary.ContainsKey(prefabEnum)) return;
-        this.poolDictionary[prefabEnum].Despawn(instance);
-    }
+
+
 }

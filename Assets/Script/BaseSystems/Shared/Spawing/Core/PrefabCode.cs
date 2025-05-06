@@ -4,9 +4,12 @@ public enum PrefabCode
 
     MainStation = 1,
 
-    Ship1 = 100,
+    ShipResource1 = 100,
+    ShipResource2 = 101,
 
     IronPlanet = 200,   
 
     PlanetSpawnPoint = 300,
+
+    Enemy1 = 400,
 }

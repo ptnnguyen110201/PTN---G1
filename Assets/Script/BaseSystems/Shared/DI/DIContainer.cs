@@ -17,6 +17,10 @@ public class DIContainer
     {
         this.CachedInstances[typeof(TInterface)] = instance;
     }
+    public void Bind<TInterface>(Func<object> factory)
+    {
+        this.Bindings[typeof(TInterface)] = factory;
+    }
 
     public TInterface Resolve<TInterface>()
     {

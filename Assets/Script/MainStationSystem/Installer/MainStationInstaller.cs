@@ -13,9 +13,6 @@ namespace GameSystems.MainStationSystem
             container.Bind<IMainStationShipStorage, MainStationShipStorage>();
             container.Bind<IMainStation, MainStation>();
 
-
-
-            
         }
     }
 }
