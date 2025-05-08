@@ -10,7 +10,6 @@ public class ShipManagerInstaller : GameSystemInstaller
         container.Bind<ISpawner<ShipResourceCtrl>>(() => new Spawner<ShipResourceCtrl>(container.Resolve<IShipResourcePrefabLoader>()));
         container.Bind<IShipResourceManager, ShipResourceManager>();
 
-
     }
 
 }

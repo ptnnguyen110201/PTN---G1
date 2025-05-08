@@ -14,10 +14,11 @@ public class MainMenuBootstrapper : IBootstrapper
 
         MainStationBootstrap.Initialize(DIContainer);
         ShipManagerBootstrap.Initialize(DIContainer);
+        PlanetManagerBootstrap.Initialize(DIContainer);
+        PlanetSpawnPointManagerBootstrap.Initialize(DIContainer);
 
 
 
-       
     }
 
 }

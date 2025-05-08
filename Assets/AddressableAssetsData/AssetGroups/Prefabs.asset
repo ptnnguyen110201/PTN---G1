@@ -15,6 +15,18 @@ MonoBehaviour:
   m_GroupName: Prefabs
   m_GUID: ecae5b72250d97642b8071adcc16c079
   m_SerializeEntries:
+  - m_GUID: 5ad5acea5fc1b634aa46c1ae6bf9230a
+    m_Address: Assets/Prefabs/PlanetSpawnPoint/PlanetSpawnPoint
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PlanetSpawnPoint
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 74ff296277f14ba49b7b37fb30cc6283
+    m_Address: Assets/Prefabs/Planet/IronPlanet
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Planet
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: b48aa109b0eb1f94ab691e38be8fe378
     m_Address: Assets/Prefabs/Enemy/Enemy1.prefab
     m_ReadOnly: 0

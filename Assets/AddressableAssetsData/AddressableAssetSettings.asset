@@ -102,6 +102,8 @@ MonoBehaviour:
     - default
     - ShipResource
     - ShipEnemy
+    - Planet
+    - PlanetSpawnPoint
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: 88e87c0b8c240f94a8a69a596c46360a, type: 2}
