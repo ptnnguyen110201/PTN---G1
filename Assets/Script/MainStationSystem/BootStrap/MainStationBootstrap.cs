@@ -1,13 +1,14 @@
-using GameSystems.Shared.Interfaces.Installer;
 
-namespace GameSystems.MainStationSystem
+public static class MainStationBootstrap
 {
-    public static class MainStationBootstrap
+    public static void Initialize(DIContainer DIContainer)
     {
-        public static void Initialize(DIContainer DIContainer)
-        {
-            MainStationInstaller installer = new MainStationInstaller();
-            installer.Install(DIContainer);
-        }
+        MainStationInstaller installer = new MainStationInstaller();
+        installer.Install(DIContainer);
+
+
+
+        
     }
 }
+

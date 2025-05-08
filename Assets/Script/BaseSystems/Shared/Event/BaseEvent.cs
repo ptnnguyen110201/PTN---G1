@@ -1,7 +1,6 @@
-namespace GameSystems.Shared.Events
+
+public abstract class BaseEvent
 {
-    public abstract class BaseEvent
-    {
-        public abstract void Clear();
-    }
+    public abstract void Clear();
 }
+

@@ -1,21 +1,24 @@
 
-using GameSystems.MainStationSystem;
+
 using UnityEngine;
+using UnityEngine.UI;
 
-namespace ProjectName.Bootstrap
+public class MainMenuBootstrapper : IBootstrapper
 {
-    public class MainMenuBootstrapper : IBootstrapper
+    public void Initialize()
     {
-        public void Initialize()
-        {
-            UpdateBootstrap.Initialize();
+        UpdateBootstrap.Initialize();
 
-            DIContainer DIContainer = new DIContainer();
-            GameContext.Instance.SetDIContainer(DIContainer);
+        DIContainer DIContainer = new DIContainer();
+        GameContext.Instance.SetDIContainer(DIContainer);
 
-            MainStationBootstrap.Initialize(DIContainer);
-            ShipManagerBootstrap.Initialize(DIContainer);
-        }
+        MainStationBootstrap.Initialize(DIContainer);
+        ShipManagerBootstrap.Initialize(DIContainer);
 
+
+
+       
     }
+
 }
+

@@ -1,25 +1,24 @@
-namespace GameSystems.Shared.Events
+
+public static class EventKeys
 {
-    public static class EventKeys
-    {
-        // Level
-        public const string OnLevelChanged = "OnLevelChanged";
-        public const string OnLightYearsChanged = "OnLightYearsChanged";
+    // Level
+    public const string OnLevelChanged = "OnLevelChanged";
+    public const string OnLightYearsChanged = "OnLightYearsChanged";
 
-        // Resource
-        public const string OnResourceChanged = "OnResourceChanged";
+    // Resource
+    public const string OnResourceChanged = "OnResourceChanged";
 
-        // Ship
-        public const string OnShipAdded = "OnShipAdded";
-        public const string OnShipRemoved = "OnShipRemoved";
+    // Ship
+    public const string OnShipAdded = "OnShipAdded";
+    public const string OnShipRemoved = "OnShipRemoved";
 
-        // UI
-  
-        // MainStation 
-        public const string OnMainStationDataLoaded = "OnMainStationDataLoaded";
-        public const string OnMainStationDataSaves = "OnMainStationDataSaves";
+    // UI
 
- 
+    // MainStation 
+    public const string OnMainStationDataLoaded = "OnMainStationDataLoaded";
+    public const string OnMainStationDataSaves = "OnMainStationDataSaves";
 
-    }
+
+
 }
+

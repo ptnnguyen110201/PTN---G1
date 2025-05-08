@@ -6,19 +6,21 @@ public class MainStation : IMainStation, ISaveable
     public IMainStationStorage MainStationStorage { get; private set; }
     public IMainStationUpgarde MainStationUpgarde { get; private set; }
     public IMainStationShipStorage MainStationShipStorage { get; private set; }
-
+    public IMainStationCurrency MainStationCurrency { get; private set; }
     public string SaveKey => "MainStation";
 
     public MainStation(
         IMainStationLevel mainStationLevel,
         IMainStationStorage mainStationStorage,
         IMainStationUpgarde mainStationUpgrade,
-        IMainStationShipStorage mainStationShipStorage)
+        IMainStationShipStorage mainStationShipStorage,
+        IMainStationCurrency mainStationCurrency)
     {
         this.MainStationLevel = mainStationLevel;
         this.MainStationStorage = mainStationStorage;
         this.MainStationUpgarde = mainStationUpgrade;
         this.MainStationShipStorage = mainStationShipStorage;
+        this.MainStationCurrency = mainStationCurrency;
     }
 
     public void Initialize()

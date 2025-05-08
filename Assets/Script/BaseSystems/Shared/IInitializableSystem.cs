@@ -1,8 +1,6 @@
-namespace GameSystems.Shared.SystemBase
+
+public interface IInitializableSystem
 {
-    public interface IInitializableSystem
-    {
-        void Initialize();
-        
-    }
+    void Initialize();
+
 }

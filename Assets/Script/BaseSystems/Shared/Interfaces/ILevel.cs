@@ -1,4 +1,3 @@
-using GameSystems.Shared.SystemBase;
 
 public interface ILevel : IInitializableSystem
 {

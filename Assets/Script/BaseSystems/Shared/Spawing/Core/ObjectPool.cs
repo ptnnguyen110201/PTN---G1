@@ -5,13 +5,12 @@ public class ObjectPool<T> where T : Component, IPoolable
 {
     private readonly T prefab;
     private readonly Transform parent;
-    private readonly Stack<T> poolStack = new Stack<T>();
+    private readonly Stack<T> poolStack = new();
 
     public ObjectPool(T prefab, Transform parent = null)
     {
         this.prefab = prefab;
         this.parent = parent;
-        
     }
 
     public void Preload(int count)

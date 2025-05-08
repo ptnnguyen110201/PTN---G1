@@ -1,5 +1,4 @@
 
-using GameSystems.Shared.SystemBase;
 
 public interface IMainStation : IInitializableSystem
 {
@@ -7,4 +6,5 @@ public interface IMainStation : IInitializableSystem
     public IMainStationStorage MainStationStorage { get; }
     public IMainStationUpgarde MainStationUpgarde { get; }
     public IMainStationShipStorage MainStationShipStorage { get; }
+    public IMainStationCurrency MainStationCurrency { get; }
 }

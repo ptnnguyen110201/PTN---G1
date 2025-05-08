@@ -1,8 +1,7 @@
-namespace ProjectName.Bootstrap
+
+public interface IBootstrapper
 {
-    public interface IBootstrapper
-    {
-        void Initialize();
-     
-    }
+    void Initialize();
+
 }
+

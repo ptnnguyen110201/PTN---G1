@@ -1,6 +1,4 @@
 
-using GameSystems.Shared.SystemBase;
-
 public interface IUpdateManager : IInitializableSystem
 {
     void Update();

@@ -6,6 +6,7 @@ public class Spawner<T> : ISpawner<T> where T : Component, IPoolable
     private readonly IPrefabLoader prefabLoader;
     private readonly Dictionary<PrefabCode, ObjectPool<T>> poolDictionary = new();
     private readonly Dictionary<PrefabType, Transform> poolHolders = new();
+    private readonly Dictionary<T, PrefabCode> instanceToCode = new();
 
     public Spawner(IPrefabLoader prefabLoader)
     {
@@ -58,7 +59,7 @@ public class Spawner<T> : ISpawner<T> where T : Component, IPoolable
             GameObject prefabObject = this.prefabLoader.GetPrefab(prefabCode);
             if (prefabObject == null)
             {
-                Debug.LogError($"[Spawner] Failed to spawn prefab: {this.prefabLoader.PrefabType}");
+                Debug.LogError($"[Spawner] Failed to spawn prefab: {prefabCode}");
                 return null;
             }
 
@@ -73,32 +74,25 @@ public class Spawner<T> : ISpawner<T> where T : Component, IPoolable
             this.poolDictionary[prefabCode] = new ObjectPool<T>(prefab, poolHolder);
         }
 
-        return this.poolDictionary[prefabCode].Spawn(position, rotation);
+        T instance = this.poolDictionary[prefabCode].Spawn(position, rotation);
+        this.instanceToCode[instance] = prefabCode;
+
+        return instance;
     }
 
-    public void Despawn(PrefabCode prefabCode, T instance)
+    public void Despawn(T instance)
     {
-        if (!this.poolDictionary.ContainsKey(prefabCode)) return;
-        this.poolDictionary[prefabCode].Despawn(instance);
-    }
-
-    public List<GameObject> GetPooledObjects()
-    {
-        if (this.poolHolders.TryGetValue(this.prefabLoader.PrefabType, out Transform holder))
+        if (this.instanceToCode.TryGetValue(instance, out PrefabCode prefabCode) &&
+            this.poolDictionary.TryGetValue(prefabCode, out ObjectPool<T> pool))
         {
-            List<GameObject> pooledObjects = new();
-
-            foreach (Transform child in holder)
-            {
-                pooledObjects.Add(child.gameObject);
-            }
-   
-            return pooledObjects;
+            pool.Despawn(instance);
+            this.instanceToCode.Remove(instance);
         }
-
-        Debug.LogWarning($"[Spawner] No PoolHolder found for PrefabCode: {this.prefabLoader.PrefabType}");
-        return new List<GameObject>();
+        else
+        {
+            Debug.LogWarning($"[Spawner] Attempted to despawn unknown or unmanaged instance: {instance?.name}");
+        }
     }
 
-
+ 
 }

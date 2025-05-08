@@ -1,14 +1,13 @@
 using UnityEngine;
 
-public abstract class ShipCtrl : MonoBehaviour, IPoolable
+public abstract class ShipCtrl<T> : MonoBehaviour, IPoolable where T : ShipCtrl<T>
 {
-    public virtual void OnDespawn()
-    {
+    public ISpawner<T> Spawner { get; set; }
+    public abstract void OnSpawn();
+    public abstract void OnDespawn();
 
-    }
-
-    public virtual void OnSpawn()
+    protected void DespawnSelf()
     {
-      
+        this.Spawner.Despawn(this as T);
     }
 }
