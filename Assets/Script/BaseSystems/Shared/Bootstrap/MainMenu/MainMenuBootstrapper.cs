@@ -1,24 +1,23 @@
 
 
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class MainMenuBootstrapper : IBootstrapper
 {
-    public void Initialize()
+    
+    public async Task Initialize()
     {
         UpdateBootstrap.Initialize();
 
         DIContainer DIContainer = new DIContainer();
         GameContext.Instance.SetDIContainer(DIContainer);
 
-        MainStationBootstrap.Initialize(DIContainer);
-        ShipManagerBootstrap.Initialize(DIContainer);
-        PlanetManagerBootstrap.Initialize(DIContainer);
-        PlanetSpawnPointManagerBootstrap.Initialize(DIContainer);
-
-
-
+        await MainStationBootstrap.Initialize(DIContainer);
+        await ShipManagerBootstrap.Initialize(DIContainer);
+        await PlanetManagerBootstrap.Initialize(DIContainer);
+        await PlanetSpawnPointManagerBootstrap.Initialize(DIContainer);
     }
 
 }

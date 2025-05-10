@@ -15,14 +15,14 @@ public class Spawner<T> : ISpawner<T> where T : Component, IPoolable
 
     private Transform CreatePoolHolder()
     {
-        if (this.poolHolders.ContainsKey(this.prefabLoader.PrefabType))
+        if (this.poolHolders.ContainsKey(this.prefabLoader.PrefabType()))
         {
-            return this.poolHolders[this.prefabLoader.PrefabType];
+            return this.poolHolders[this.prefabLoader.PrefabType()];
         }
 
-        GameObject poolHolderGO = new GameObject($"{this.prefabLoader.PrefabType}PoolHolder");
+        GameObject poolHolderGO = new GameObject($"{this.prefabLoader.PrefabType()}PoolHolder");
         Transform holderTransform = poolHolderGO.transform;
-        this.poolHolders.Add(this.prefabLoader.PrefabType, holderTransform);
+        this.poolHolders.Add(this.prefabLoader.PrefabType(), holderTransform);
 
         return holderTransform;
     }

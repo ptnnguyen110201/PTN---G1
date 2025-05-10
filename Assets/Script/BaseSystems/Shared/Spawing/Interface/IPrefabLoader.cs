@@ -3,11 +3,10 @@ using System.Threading.Tasks;
 
 using UnityEngine;
 
-public interface IPrefabLoader : IInitializableSystem
+public interface IPrefabLoader 
 {
-
-    Task LoadPrefabs(PrefabType prefabType);
+    PrefabType PrefabType(); 
+    Task LoadPrefabs();
     GameObject GetPrefab(PrefabCode prefabCode);
-    PrefabType PrefabType { get; }
 
 }

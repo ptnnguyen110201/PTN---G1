@@ -1,4 +1,7 @@
+using System.Threading.Tasks;
+
 public abstract class GameSystemInstaller
 {
-    public abstract void Install(DIContainer container);
+    public abstract Task Install(DIContainer container);
+
 }

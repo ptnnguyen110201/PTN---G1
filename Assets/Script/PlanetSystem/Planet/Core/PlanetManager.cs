@@ -1,12 +1,12 @@
 public class PlanetManager : IPlanetManager
 {
     public IPlanetPrefabLoader PlanetPrefabLoader { get; private set; }
-    public ISpawner<PlanetCtrl> Spawner { get; private set; }
+    public IPlanetSpawner PlanetSpawner { get; private set; }
 
-    public PlanetManager(IPlanetPrefabLoader planetPrefabLoader, ISpawner<PlanetCtrl> spawner)
+    public PlanetManager(IPlanetPrefabLoader planetPrefabLoader, IPlanetSpawner PlanetSpawner)
     {
-        this.PlanetPrefabLoader = planetPrefabLoader;
-        this.Spawner = spawner;
-        this.PlanetPrefabLoader.Initialize();
+        this.PlanetPrefabLoader = planetPrefabLoader; 
+        this.PlanetSpawner = PlanetSpawner;
+
     }
 }

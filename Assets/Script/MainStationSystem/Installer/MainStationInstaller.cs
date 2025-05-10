@@ -1,8 +1,12 @@
 
+
+using System.Threading.Tasks;
+using UnityEngine;
+
 public class MainStationInstaller : GameSystemInstaller
 {
 
-    public override void Install(DIContainer container)
+    public override Task Install(DIContainer container)
     {
         container.Bind<IMainStationLevel, MainStationLevel>();
         container.Bind<IMainStationStorage, MainStationStorage>();
@@ -11,7 +15,9 @@ public class MainStationInstaller : GameSystemInstaller
         container.Bind<IMainStationCurrency, MainStationCurrency>();
         container.Bind<IMainStation, MainStation>();
 
-        container.Bind<IMainStationViewModel, MainStationViewModel>();
+        return Task.CompletedTask;
 
     }
+
+   
 }

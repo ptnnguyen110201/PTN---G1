@@ -1,12 +1,14 @@
 
 
 
+using System.Threading.Tasks;
+
 public static class ShipManagerBootstrap
 {
-    public static void Initialize(DIContainer DIContainer)
+    public static async Task Initialize(DIContainer DIContainer)
     {
         ShipManagerInstaller shipManagerInstaller = new ShipManagerInstaller();
-        shipManagerInstaller.Install(DIContainer);
+        await shipManagerInstaller.Install(DIContainer);
     }
 }
 

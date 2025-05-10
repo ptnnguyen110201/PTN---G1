@@ -2,22 +2,19 @@ using UnityEngine;
 
 public class PlanetSpawnPointCtrl : MonoBehaviour, IPoolable
 {
-    [Inject] IPlanetRespawner PlanetRespawner;
+    [Inject] private IPlanetManager planetManager;
+    [Inject] private IPlanetRespawnerFactory planetRespawnerFactory;
+
+    private IPlanetRespawner planetRespawner;
 
     public void OnDespawn()
     {
-
     }
 
     public void OnSpawn()
     {
         GameContext.Instance.Container.InjectInto(this);
-        Invoke(nameof(this.Init), 1f);
-    }
 
-    protected void Init()
-    {
-        this.PlanetRespawner.SetSpawnPoint(this);
-
+        this.planetRespawner = this.planetRespawnerFactory.Create(this);
     }
 }

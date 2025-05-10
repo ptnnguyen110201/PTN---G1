@@ -4,20 +4,14 @@ using UnityEngine;
 
 public class ShipResourceManager : IShipResourceManager
 {
-    public IShipResourcePrefabLoader PrefabLoader { get; private set; }
-    public ISpawner<ShipResourceCtrl> Spawner { get; private set; }
+    public IShipResourcePrefabLoader ShipResourcePrefabLoader { get; private set; }
 
-    public ShipResourceManager(ISpawner<ShipResourceCtrl> spawner, IShipResourcePrefabLoader prefabLoader)
+    public IShipResourceSpawner ShipResourceSpawner { get; private set; }
+
+    public ShipResourceManager(IShipResourceSpawner ShipResourceSpawner, IShipResourcePrefabLoader ShipResourcePrefabLoader)
     {
-        this.Spawner = spawner;
-        this.PrefabLoader = prefabLoader;
-        this.PrefabLoader.Initialize();
+        this.ShipResourceSpawner = ShipResourceSpawner;
+        this.ShipResourcePrefabLoader = ShipResourcePrefabLoader;
     }
-    public ShipResourceCtrl Spawn(PrefabCode prefabCode, Vector3 position, Quaternion rotation)
-    {
-        ShipResourceCtrl shipResourceCtrl = Spawner.Spawn(prefabCode, position, rotation);
-        if (shipResourceCtrl == null) return null;
-        shipResourceCtrl.Spawner = Spawner;
-        return shipResourceCtrl;
-    }
+   
 }

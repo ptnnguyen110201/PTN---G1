@@ -1,8 +1,8 @@
 
 using UnityEngine;
 
-public interface IShipResourceManager : IShipManager<ShipResourceCtrl>
+public interface IShipResourceManager 
 {
-    IShipResourcePrefabLoader PrefabLoader { get; }
-    ShipResourceCtrl Spawn(PrefabCode prefabCode, Vector3 position, Quaternion rotation);
+    IShipResourcePrefabLoader ShipResourcePrefabLoader { get; }
+    IShipResourceSpawner ShipResourceSpawner { get; }
 }

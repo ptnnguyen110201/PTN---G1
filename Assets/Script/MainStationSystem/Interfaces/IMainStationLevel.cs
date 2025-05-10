@@ -6,4 +6,7 @@ public interface IMainStationLevel : ILevel
     int GetUpgradeRequiredMent(string ResourceType);
 
     void SetLevel(int CurrentLevel, int MaxLevel);
+
+
+    
 }

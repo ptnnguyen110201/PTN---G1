@@ -5,15 +5,10 @@ using UnityEngine.ResourceManagement.ResourceLocations;
 using UnityEngine;
 using System.Threading.Tasks;
 
-public class PrefabLoader : IPrefabLoader
+public abstract class PrefabLoader : IPrefabLoader
 {
     protected readonly Dictionary<PrefabCode, GameObject> CachedPrefabs = new();
-    public PrefabType PrefabType { get; private set; }
-
-    public PrefabLoader(PrefabType prefabType)
-    {
-        this.PrefabType = prefabType;
-    }
+    public abstract PrefabType PrefabType();
 
     public GameObject GetPrefab(PrefabCode prefabCode)
     {
@@ -26,9 +21,9 @@ public class PrefabLoader : IPrefabLoader
         return prefab;
     }
 
-    public Task LoadPrefabs(PrefabType prefabType)
+    public Task LoadPrefabs()
     {
-        string label = prefabType.ToString(); 
+        string label = this.PrefabType().ToString(); 
         return this.LoadPrefabsByLabel(label);
     }
 
@@ -66,8 +61,5 @@ public class PrefabLoader : IPrefabLoader
         }
     }
 
-    public void Initialize()
-    {
-        _ = this.LoadPrefabs(this.PrefabType);
-    }
+   
 }

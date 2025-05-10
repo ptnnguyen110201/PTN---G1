@@ -1,7 +1,9 @@
 
+using System.Threading.Tasks;
+
 public interface IBootstrapper
 {
-    void Initialize();
+    Task Initialize();
 
 }
 

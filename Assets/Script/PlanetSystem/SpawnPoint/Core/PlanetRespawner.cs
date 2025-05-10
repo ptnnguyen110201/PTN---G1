@@ -9,16 +9,15 @@ public class PlanetRespawner : IPlanetRespawner, IUpdatable
     public float cooldownTimer { get; private set; } = 0f;
 
 
-    public PlanetRespawner(IPlanetManager planetManager)
+    public PlanetRespawner(IPlanetManager planetManager, PlanetSpawnPointCtrl PlanetSpawnPointCtrl)
     {
         this.PlanetManager = planetManager;
+        this.PlanetSpawnPointCtrl = PlanetSpawnPointCtrl;
         UpdateInstaller.Instance.Register(this);
+        
     }
 
-    public void SetSpawnPoint(PlanetSpawnPointCtrl spawnPoint)
-    {
-        this.PlanetSpawnPointCtrl = spawnPoint;
-    }
+  
 
     public void OnUpdate(float deltaTime)
     {
@@ -30,6 +29,7 @@ public class PlanetRespawner : IPlanetRespawner, IUpdatable
     protected bool CanRespawn(float deltaTime)
     {
         this.cooldownTimer += deltaTime;
+        
         if (this.cooldownTimer < this.cooldownTime) return false;
         this.cooldownTimer = 0;
 
@@ -38,7 +38,7 @@ public class PlanetRespawner : IPlanetRespawner, IUpdatable
 
     protected void SpawnPlanet()
     {
-        this.PlanetCtrl = PlanetManager.Spawner.Spawn(
+        this.PlanetCtrl = PlanetManager.PlanetSpawner.Spawn(
             PrefabCode.IronPlanet,
             PlanetSpawnPointCtrl.transform.position,
             PlanetSpawnPointCtrl.transform.rotation

@@ -1,7 +1,7 @@
 public class PlanetSpawnPointPrefab : PrefabLoader, IPlanetSpawnPointPrefab
 {
-    public PlanetSpawnPointPrefab(PrefabType prefabType) : base(prefabType)
-    {
-
-    }
+    public override PrefabType PrefabType() => global::PrefabType.PlanetSpawnPoint;
+    
+        
+    
 }

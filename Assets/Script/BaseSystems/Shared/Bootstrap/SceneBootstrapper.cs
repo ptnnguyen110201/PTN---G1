@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -5,8 +6,8 @@ using UnityEngine.SceneManagement;
 public class SceneBootstrapper : MonoBehaviour
 {
     protected IBootstrapper bootstrapper;
-
-    protected void Awake()
+    public bool IsLoaded = false;
+    protected async void Awake()
     {
         string sceneName = SceneManager.GetActiveScene().name;
         switch (sceneName)
@@ -20,8 +21,8 @@ public class SceneBootstrapper : MonoBehaviour
                 break;
         }
 
-        this.bootstrapper?.Initialize();
-
+       await this.bootstrapper?.Initialize();
+       this.IsLoaded = true;
     }
 
 

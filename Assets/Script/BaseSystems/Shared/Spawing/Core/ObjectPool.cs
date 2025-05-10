@@ -36,9 +36,10 @@ public class ObjectPool<T> where T : Component, IPoolable
         T instance = this.poolStack.Count > 0 ? this.poolStack.Pop() : this.InstantiateNewObject();
 
         instance.transform.position = position;
-        instance.transform.rotation = rotation;
-        instance.gameObject.SetActive(true);
+        instance.transform.rotation = rotation; 
         instance.OnSpawn();
+        instance.gameObject.SetActive(true);
+     
         return instance;
     }
 

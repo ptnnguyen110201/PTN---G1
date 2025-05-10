@@ -1,12 +1,14 @@
 
 
 
+using System.Threading.Tasks;
+
 public static class PlanetManagerBootstrap
 {
-    public static void Initialize(DIContainer DIContainer)
+    public static async Task Initialize(DIContainer DIContainer)
     {
         PlanetManagerInstaller planetManagerInstaller = new PlanetManagerInstaller();
-        planetManagerInstaller.Install(DIContainer);
+        await planetManagerInstaller.Install(DIContainer);
     }
 }
 

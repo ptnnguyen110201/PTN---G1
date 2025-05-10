@@ -1,6 +1,6 @@
 public class PlanetPrefabLoader : PrefabLoader, IPlanetPrefabLoader
 {
-    public PlanetPrefabLoader(PrefabType prefabType) : base(prefabType)
-    {
-    }
+
+    public override PrefabType PrefabType() => global::PrefabType.Planet;
+    
 }

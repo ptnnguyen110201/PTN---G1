@@ -1,13 +1,19 @@
 
 
 
+using System.Threading.Tasks;
+
 public class ShipManagerInstaller : GameSystemInstaller
 {
 
-    public override void Install(DIContainer container)
+    public override async Task Install(DIContainer container)
     {
-        container.Bind<IShipResourcePrefabLoader>(() => new ShipResourcePrefabLoader(PrefabType.ShipResource));
-        container.Bind<ISpawner<ShipResourceCtrl>>(() => new Spawner<ShipResourceCtrl>(container.Resolve<IShipResourcePrefabLoader>()));
+
+        ShipResourcePrefabLoader shipResourcePrefabLoader = new ShipResourcePrefabLoader();
+        await shipResourcePrefabLoader.LoadPrefabs();
+
+        container.Bind<IShipResourcePrefabLoader>(() => shipResourcePrefabLoader);
+        container.Bind<IShipResourceSpawner>(() => new ShipResourceSpawner(shipResourcePrefabLoader));
         container.Bind<IShipResourceManager, ShipResourceManager>();
 
     }
