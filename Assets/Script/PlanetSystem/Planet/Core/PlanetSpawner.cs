@@ -1,6 +1,6 @@
 public class PlanetSpawner : Spawner<PlanetCtrl>, IPlanetSpawner
 {
-    public PlanetSpawner(IPrefabLoader prefabLoader) : base(prefabLoader)
+    public PlanetSpawner(IPlanetPrefabLoader prefabLoader) : base(prefabLoader)
     {
 
     }

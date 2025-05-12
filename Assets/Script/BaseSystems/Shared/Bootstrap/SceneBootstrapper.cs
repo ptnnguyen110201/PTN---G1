@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 public class SceneBootstrapper : MonoBehaviour
 {
     protected IBootstrapper bootstrapper;
-    public bool IsLoaded = false;
     protected async void Awake()
     {
         string sceneName = SceneManager.GetActiveScene().name;
@@ -21,8 +20,7 @@ public class SceneBootstrapper : MonoBehaviour
                 break;
         }
 
-       await this.bootstrapper?.Initialize();
-       this.IsLoaded = true;
+        await this.bootstrapper?.Initialize();
     }
 
 

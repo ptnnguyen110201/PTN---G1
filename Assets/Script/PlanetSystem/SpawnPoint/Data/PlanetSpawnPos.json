@@ -3,48 +3,56 @@
         "ID": 1,
         "PosX": -1.42,
         "PosY": -1.4,
-        "PosZ": 0
+        "PosZ": 0,
+        "Name": [ "IronPlanet","GoldPlanet" ]
     },
     {
         "ID": 2,
         "PosX": 2.47,
         "PosY": 1.31,
-        "PosZ": 0
+        "PosZ": 0,
+        "Name": [ "IronPlanet", "GoldPlanet" ]
     },
     {
         "ID": 3,
         "PosX": -1.11,
         "PosY": 3.42,
-        "PosZ": 0
+        "PosZ": 0,
+        "Name": [ "IronPlanet", "GoldPlanet" ]
     },
     {
         "ID": 4,
         "PosX": -0.11,
         "PosY": 4.4,
-        "PosZ": 0
+        "PosZ": 0,
+        "Name": [ "IronPlanet", "GoldPlanet" ]
     },
     {
         "ID": 5,
         "PosX": -1.29,
         "PosY": -5.04,
-        "PosZ": 0
+        "PosZ": 0,
+        "Name": [ "IronPlanet", "GoldPlanet" ]
     },
     {
         "ID": 6,
         "PosX": -3.31,
         "PosY": -5.01,
-        "PosZ": 0
+        "PosZ": 0,
+        "Name": [ "IronPlanet", "GoldPlanet" ]
     },
     {
         "ID": 7,
         "PosX": 3.95,
         "PosY": -5.54,
-        "PosZ": 0
+        "PosZ": 0,
+        "Name": [ "IronPlanet", "GoldPlanet" ]
     },
     {
         "ID": 8,
         "PosX": 5.1,
         "PosY": 5.63,
-        "PosZ": 0
+        "PosZ": 0,
+        "Name": [ "IronPlanet", "GoldPlanet" ]
     }
 ]

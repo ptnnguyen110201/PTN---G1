@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class MainStation : IMainStation, ISaveable
@@ -9,23 +10,28 @@ public class MainStation : IMainStation, ISaveable
     public IMainStationCurrency MainStationCurrency { get; private set; }
     public string SaveKey => "MainStation";
 
+
+
     public MainStation(
         IMainStationLevel mainStationLevel,
         IMainStationStorage mainStationStorage,
         IMainStationUpgarde mainStationUpgrade,
         IMainStationShipStorage mainStationShipStorage,
-        IMainStationCurrency mainStationCurrency)
+        IMainStationCurrency mainStationCurrency
+        )
     {
         this.MainStationLevel = mainStationLevel;
         this.MainStationStorage = mainStationStorage;
         this.MainStationUpgarde = mainStationUpgrade;
         this.MainStationShipStorage = mainStationShipStorage;
         this.MainStationCurrency = mainStationCurrency;
+
     }
 
-    public void Initialize()
+    public Task Initialize()
     {
-       
+        Debug.Log("MainStation Initialized");
+        return Task.CompletedTask;
     }
 
     public object CaptureData()

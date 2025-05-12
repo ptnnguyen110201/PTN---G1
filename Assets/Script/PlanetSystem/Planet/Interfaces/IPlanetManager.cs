@@ -1,7 +1,7 @@
 
 using UnityEngine;
 
-public interface IPlanetManager 
+public interface IPlanetManager : IInitializableSystem
 {
     IPlanetPrefabLoader PlanetPrefabLoader { get; }
     IPlanetSpawner PlanetSpawner { get; }

@@ -1,7 +1,10 @@
+
+using System.Collections.Generic;
+
+
 public interface IPlanetRespawner
 {
-    IPlanetManager PlanetManager { get; }
-    PlanetSpawnPointCtrl PlanetSpawnPointCtrl { get; }
+    PlanetPointCtrl PlanetPointCtrl { get; }
     PlanetCtrl PlanetCtrl { get; }
     float cooldownTime { get; }
     float cooldownTimer { get; }

@@ -1,33 +1,19 @@
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading.Tasks;
 using UnityEngine;
+
 public abstract class JsonObjectReader : IJsonObjectReader
 {
     protected Dictionary<string, object> Data;
+
     protected abstract string JsonPath();
+    public abstract Task LoadPath();
 
-    public JsonObjectReader()
+    public void SetRow(Dictionary<string, object> rowData)
     {
-        string path = this.JsonPath();
-
-        if (!File.Exists(path))
-        {
-  
-            return;
-        }
-
-        string jsonContent = File.ReadAllText(path);
-        var rawList = JsonConvert.DeserializeObject<List<Dictionary<string, object>>>(jsonContent);
-        if (rawList != null && rawList.Count > 0)
-        {
-            this.Data = rawList[0];
-        }
-        else
-        {
-          
-            this.Data = new Dictionary<string, object>();
-        }
+        this.Data = rowData;
     }
 
     public void SetRow(int index)
@@ -69,5 +55,16 @@ public abstract class JsonObjectReader : IJsonObjectReader
         return new Vector3(LoadFloat(keyX), LoadFloat(keyY), LoadFloat(keyZ));
     }
 
-    public bool HasKey(string key) => Data.ContainsKey(key);
+    public bool HasKey(string key) => Data != null && Data.ContainsKey(key);
+
+    protected object GetValue(string key)
+    {
+        if (!this.Data.ContainsKey(key))
+        {
+            Debug.LogWarning($"[JsonObjectReader] Key not found: {key}");
+            return null;
+        }
+
+        return this.Data[key];
+    }
 }

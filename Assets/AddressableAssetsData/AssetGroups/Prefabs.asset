@@ -28,7 +28,7 @@ MonoBehaviour:
     - Planet
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: b48aa109b0eb1f94ab691e38be8fe378
-    m_Address: Assets/Prefabs/Enemy/Enemy1.prefab
+    m_Address: Assets/Prefabs/Enemy/Enemy1
     m_ReadOnly: 0
     m_SerializedLabels:
     - ShipEnemy
@@ -38,6 +38,12 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - ShipResource
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e5afa508dbaf2304499c8f31761c4f2d
+    m_Address: Assets/Prefabs/Planet/GoldPlanet
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Planet
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: f9e0ddab7b0db6442802454cb45c2498
     m_Address: Assets/Prefabs/Ship/ShipResource2

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class UpdateManager : IUpdateManager
@@ -44,8 +45,8 @@ public class UpdateManager : IUpdateManager
 
 
 
-    public void Initialize()
+    public Task Initialize()
     {
-        return;
+        return Task.CompletedTask;
     }
 }

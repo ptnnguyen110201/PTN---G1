@@ -9,6 +9,10 @@ public static class ShipManagerBootstrap
     {
         ShipManagerInstaller shipManagerInstaller = new ShipManagerInstaller();
         await shipManagerInstaller.Install(DIContainer);
+
+
+        IShipResourceManager shipResourceManager = DIContainer.Resolve<IShipResourceManager>();
+        await shipResourceManager.Initialize();
     }
 }
 

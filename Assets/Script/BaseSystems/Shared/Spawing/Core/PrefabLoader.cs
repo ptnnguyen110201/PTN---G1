@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 
 public abstract class PrefabLoader : IPrefabLoader
 {
-    protected readonly Dictionary<PrefabCode, GameObject> CachedPrefabs = new();
+    protected readonly Dictionary<string, GameObject> CachedPrefabs = new();
     public abstract PrefabType PrefabType();
 
-    public GameObject GetPrefab(PrefabCode prefabCode)
+    public GameObject GetPrefab(string prefabName)
     {
-        if (!this.CachedPrefabs.TryGetValue(prefabCode, out GameObject prefab))
+        if (!this.CachedPrefabs.TryGetValue(prefabName, out GameObject prefab))
         {
-            Debug.LogError($"[PrefabLoader] Prefab not found in cache: {prefabCode}");
+            Debug.LogError($"[PrefabLoader] Prefab not found in cache: {prefabName}");
             return null;
         }
 
@@ -23,7 +23,7 @@ public abstract class PrefabLoader : IPrefabLoader
 
     public Task LoadPrefabs()
     {
-        string label = this.PrefabType().ToString(); 
+        string label = this.PrefabType().ToString();
         return this.LoadPrefabsByLabel(label);
     }
 
@@ -50,12 +50,8 @@ public abstract class PrefabLoader : IPrefabLoader
             if (loadHandle.Status == AsyncOperationStatus.Succeeded)
             {
                 GameObject prefab = loadHandle.Result;
-                string name = prefab.name;
-
-                if (!System.Enum.TryParse(name, out PrefabCode prefabCode)) continue;
-
-                if (this.CachedPrefabs.ContainsKey(prefabCode)) continue;
-                this.CachedPrefabs[prefabCode] = prefab;
+                if (this.CachedPrefabs.ContainsKey(prefab.name)) continue;
+                this.CachedPrefabs[prefab.name] = prefab;
 
             }
         }

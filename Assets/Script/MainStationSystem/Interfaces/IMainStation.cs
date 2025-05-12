@@ -1,5 +1,7 @@
 
 
+using UnityEngine;
+
 public interface IMainStation : IInitializableSystem
 {
     public IMainStationLevel MainStationLevel { get; }    

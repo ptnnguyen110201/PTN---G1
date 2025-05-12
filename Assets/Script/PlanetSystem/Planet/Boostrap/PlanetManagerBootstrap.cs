@@ -9,6 +9,10 @@ public static class PlanetManagerBootstrap
     {
         PlanetManagerInstaller planetManagerInstaller = new PlanetManagerInstaller();
         await planetManagerInstaller.Install(DIContainer);
+
+
+        IPlanetManager planetManager = DIContainer.Resolve<IPlanetManager>();
+        await planetManager.Initialize();
     }
 }
 

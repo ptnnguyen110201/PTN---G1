@@ -7,6 +7,6 @@ public interface IPrefabLoader
 {
     PrefabType PrefabType(); 
     Task LoadPrefabs();
-    GameObject GetPrefab(PrefabCode prefabCode);
+    GameObject GetPrefab(string prefabName);
 
 }

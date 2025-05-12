@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 
 public class MainStationLevel : IMainStationLevel
@@ -10,9 +11,9 @@ public class MainStationLevel : IMainStationLevel
     public Dictionary<string, int> UpgradeRequirements { get; private set; } = new Dictionary<string, int>()
     {
         {"Iron", 5 }
-        
+
     };
- 
+
     public void OnLevelUp()
     {
         if (this.IsMaxLevel()) return;
@@ -36,8 +37,8 @@ public class MainStationLevel : IMainStationLevel
         this.MaxLevel = MaxLevel;
     }
 
-    public void Initialize()
+    public Task Initialize()
     {
-      
+        return Task.CompletedTask;
     }
 }

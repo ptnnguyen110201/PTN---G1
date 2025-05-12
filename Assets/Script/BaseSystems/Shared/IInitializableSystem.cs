@@ -1,6 +1,8 @@
 
+using System.Threading.Tasks;
+
 public interface IInitializableSystem
 {
-    void Initialize();
+    Task Initialize();
 
 }

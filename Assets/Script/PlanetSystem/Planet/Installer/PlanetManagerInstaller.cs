@@ -3,16 +3,14 @@ using UnityEngine;
 
 public class PlanetManagerInstaller : GameSystemInstaller
 {
-    public override async Task Install(DIContainer container)
+    public override Task Install(DIContainer container)
     {
-        PlanetPrefabLoader PlanetPrefabLoader = new();
-        await PlanetPrefabLoader.LoadPrefabs();
 
-        container.Bind<IPlanetPrefabLoader>(() => PlanetPrefabLoader);
-        container.Bind<IPlanetSpawner>(() => new PlanetSpawner(PlanetPrefabLoader));
+        container.Bind<IPlanetPrefabLoader, PlanetPrefabLoader>();
+        container.Bind<IPlanetSpawner, PlanetSpawner>();
         container.Bind<IPlanetManager, PlanetManager>();
-
-       
+        return Task.CompletedTask;
+      
     }
    
 }

@@ -1,3 +1,6 @@
+using UnityEngine;
+using System.Threading.Tasks;
+
 public class PlanetManager : IPlanetManager
 {
     public IPlanetPrefabLoader PlanetPrefabLoader { get; private set; }
@@ -8,5 +11,11 @@ public class PlanetManager : IPlanetManager
         this.PlanetPrefabLoader = planetPrefabLoader; 
         this.PlanetSpawner = PlanetSpawner;
 
+    }
+
+    public async Task Initialize()
+    {
+        await this.PlanetPrefabLoader.LoadPrefabs();
+        Debug.Log("PlanetManager Initialize");
     }
 }
