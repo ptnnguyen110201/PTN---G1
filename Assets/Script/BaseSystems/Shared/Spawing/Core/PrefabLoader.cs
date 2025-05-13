@@ -5,6 +5,7 @@ using UnityEngine.ResourceManagement.ResourceLocations;
 using UnityEngine;
 using System.Threading.Tasks;
 
+
 public abstract class PrefabLoader : IPrefabLoader
 {
     protected readonly Dictionary<string, GameObject> CachedPrefabs = new();

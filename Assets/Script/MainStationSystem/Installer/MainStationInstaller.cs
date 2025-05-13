@@ -12,8 +12,11 @@ public class MainStationInstaller : GameSystemInstaller
         container.Bind<IMainStationUpgarde, MainStationUpgrade>();
         container.Bind<IMainStationShipStorage, MainStationShipStorage>();
         container.Bind<IMainStationCurrency, MainStationCurrency>();
-       
+        container.Bind<IMainStationPrefab, MainStationPrefab>();
+        container.Bind<IMainStationSpawner, MainStationSpawner>();
         container.Bind<IMainStation, MainStation>();
+
+        
         return Task.CompletedTask;
 
     }

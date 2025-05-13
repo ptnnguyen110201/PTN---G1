@@ -16,6 +16,6 @@ public class PlanetManager : IPlanetManager
     public async Task Initialize()
     {
         await this.PlanetPrefabLoader.LoadPrefabs();
-        Debug.Log("PlanetManager Initialize");
+        Debug.Log("PlanetManager Initialized");
     }
 }

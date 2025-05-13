@@ -19,7 +19,7 @@ MonoBehaviour:
     m_Address: Assets/Prefabs/PlanetSpawnPoint/PlanetSpawnPoint
     m_ReadOnly: 0
     m_SerializedLabels:
-    - PlanetSpawnPoint
+    - PlanetPoint
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 74ff296277f14ba49b7b37fb30cc6283
     m_Address: Assets/Prefabs/Planet/IronPlanet
@@ -32,6 +32,12 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - ShipEnemy
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ca12ac3d2f067504ab9d601631a8d352
+    m_Address: Assets/Prefabs/MainStation/MainStation
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Station
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: cf91903cb5ae0534b8ae9210b6763875
     m_Address: Assets/Prefabs/Ship/ShipResource1

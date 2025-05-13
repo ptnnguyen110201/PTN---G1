@@ -8,8 +8,10 @@ public class MainStation : IMainStation, ISaveable
     public IMainStationUpgarde MainStationUpgarde { get; private set; }
     public IMainStationShipStorage MainStationShipStorage { get; private set; }
     public IMainStationCurrency MainStationCurrency { get; private set; }
-    public string SaveKey => "MainStation";
+    public IMainStationPrefab MainStationPrefab { get; private set; }
+    public IMainStationSpawner MainStationSpawner { get; private set; }
 
+    public string SaveKey => "MainStation";
 
 
     public MainStation(
@@ -17,7 +19,9 @@ public class MainStation : IMainStation, ISaveable
         IMainStationStorage mainStationStorage,
         IMainStationUpgarde mainStationUpgrade,
         IMainStationShipStorage mainStationShipStorage,
-        IMainStationCurrency mainStationCurrency
+        IMainStationCurrency mainStationCurrency,
+        IMainStationPrefab mainStationPrefab,
+        IMainStationSpawner mainStationSpawner
         )
     {
         this.MainStationLevel = mainStationLevel;
@@ -25,13 +29,15 @@ public class MainStation : IMainStation, ISaveable
         this.MainStationUpgarde = mainStationUpgrade;
         this.MainStationShipStorage = mainStationShipStorage;
         this.MainStationCurrency = mainStationCurrency;
-
+        this.MainStationPrefab = mainStationPrefab;
+        this.MainStationSpawner = mainStationSpawner;
     }
 
-    public Task Initialize()
+    public async Task Initialize()
     {
+        await this.MainStationPrefab.LoadPrefabs();
+        await this.MainStationSpawner.SpawnMainStation();
         Debug.Log("MainStation Initialized");
-        return Task.CompletedTask;
     }
 
     public object CaptureData()

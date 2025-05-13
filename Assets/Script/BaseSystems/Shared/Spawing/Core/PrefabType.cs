@@ -5,5 +5,5 @@ public enum PrefabType
     ShipResource,
     ShipEnemy,
     Planet,
-    PlanetSpawnPoint,
+    PlanetPoint,
 }

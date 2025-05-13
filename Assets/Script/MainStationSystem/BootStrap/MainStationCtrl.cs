@@ -1,16 +1,21 @@
 using UnityEngine;
 
-public class MainStationCtrl : MonoBehaviour
+public class MainStationCtrl : MonoBehaviour, IMainStationCtrl, IPoolable
 {
-   
-    [Inject] public IMainStation MainStation;
+    public Transform MainStationPos { get; private set; }
+    public IMainStation MainStation { get; private set; }
 
-
-
-    private void Start()
+    public void OnDespawn()
     {
-      
-        GameContext.Instance.Container.InjectInto(this);
+     
     }
+
+    public void OnSpawn()
+    {
+       
+        this.MainStationPos = this.transform;
+        this.MainStation = GameContext.Instance.Container.Resolve<IMainStation>();
+    }
+
 }
 

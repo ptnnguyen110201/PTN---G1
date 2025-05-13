@@ -54,5 +54,13 @@
         "PosY": 5.63,
         "PosZ": 0,
         "Name": [ "IronPlanet", "GoldPlanet" ]
+    },
+    {
+        "ID": 9,
+        "PosX": 6,
+        "PosY": 10,
+        "PosZ": 0,
+        "Name": [ "IronPlanet", "GoldPlanet" ]
     }
+
 ]

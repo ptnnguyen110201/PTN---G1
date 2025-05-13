@@ -6,7 +6,7 @@ public class PlanetResourceRestore : IPlanetResourceRestore, IUpdatable
     public IPlanetFactory PlanetFactory { get; private set; }
     public Dictionary<string, int> ResoureRestore { get; private set; } = new Dictionary<string, int>()
     {
-        { "Gold", 1}
+        {"Gold" , 1}
     };
     public float RestoreTime { get; private set; } = 1;
     public float RestoreTimer { get; private set; } = 0;
@@ -26,9 +26,6 @@ public class PlanetResourceRestore : IPlanetResourceRestore, IUpdatable
     {
         if (!this.RestoreTiming(deltaTime)) return;
         this.Restore();
-
-        int GoldCout = this.PlanetFactory.PlanetStorage.GetResourceCount("Gold");
-        Debug.Log(GoldCout);
     }
 
     public bool RestoreTiming(float deltaTime)
@@ -47,9 +44,10 @@ public class PlanetResourceRestore : IPlanetResourceRestore, IUpdatable
     public void Restore()
     {
         if (this.ResoureRestore.Count <= 0) return;
-        foreach (var kvp in this.ResoureRestore)
+        foreach(var vkp in this.ResoureRestore) 
         {
-            this.PlanetFactory.PlanetStorage.AddResource(kvp.Key, kvp.Value);
+            this.PlanetFactory.PlanetStorage.AddResource(vkp.Key, vkp.Value);
+            Debug.Log("ResoureType: " + vkp.Key + "Count: " + vkp.Value);
         }
 
     }

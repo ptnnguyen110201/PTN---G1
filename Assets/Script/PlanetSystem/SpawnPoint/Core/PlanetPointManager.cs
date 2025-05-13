@@ -23,6 +23,7 @@ public class PlanetPointManager : IPlanetPointManager
     {
         await this.PlanetPointPosReader.LoadPath();
         await this.PlanetPointPrefab.LoadPrefabs();
+        await this.PlanetPointSpawner.SpawnPlanetPoint();
         Debug.Log("PlanetPointManager Initialized");
 
     }

@@ -14,9 +14,9 @@ public class MainMenuBootstrapper : IBootstrapper
         GameContext.Instance.SetDIContainer(DIContainer);
 
         await MainStationBootstrap.Initialize(DIContainer);    
-        await PlanetPointManagerBootstrap.Initialize(DIContainer);
         await PlanetManagerBootstrap.Initialize(DIContainer);
         await ShipManagerBootstrap.Initialize(DIContainer);
+        await PlanetPointManagerBootstrap.Initialize(DIContainer);
      
     }
 

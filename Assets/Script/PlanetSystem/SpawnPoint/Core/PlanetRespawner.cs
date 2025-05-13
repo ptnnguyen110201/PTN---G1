@@ -5,8 +5,10 @@ public class PlanetRespawner : IPlanetRespawner, IUpdatable
 {
     public PlanetCtrl PlanetCtrl { get; private set; }
     public PlanetPointCtrl PlanetPointCtrl { get; private set; }
-    public float cooldownTime { get; private set; } = 10f;
+    public float cooldownTime { get; private set; } = 3f;
     public float cooldownTimer { get; private set; } = 0f;
+    public List<string> PlanetList { get; private set; }
+    public void SetPlanetList(List<string> PlanetList) => this.PlanetList = new List<string>(PlanetList);
     public PlanetRespawner(PlanetPointCtrl PlanetSpawnPointCtrl)
     {
         this.PlanetPointCtrl = PlanetSpawnPointCtrl;
@@ -32,12 +34,14 @@ public class PlanetRespawner : IPlanetRespawner, IUpdatable
 
     protected void SpawnPlanet()
     {
-        this.PlanetCtrl = this.PlanetPointCtrl.PlanetManager.PlanetSpawner.Spawn(
-            this.GetPlanet(),
-           this.PlanetPointCtrl.transform.position,
-           this.PlanetPointCtrl.transform.rotation
-        );
 
+        string planetName = this.GetPlanet();
+        Vector3 spawnPoint = this.PlanetPointCtrl.transform.position;
+        Quaternion spawnRot = this.PlanetPointCtrl.transform.rotation;
+
+        IPlanetSpawner planetSpawner = this.PlanetPointCtrl.PlanetManager.PlanetSpawner;
+        PlanetCtrl planetCtrl =  planetSpawner.Spawn(planetName, spawnPoint, spawnRot);
+        this.PlanetCtrl = planetCtrl;
     }
 
     public bool PlanetExist()
@@ -48,8 +52,8 @@ public class PlanetRespawner : IPlanetRespawner, IUpdatable
 
     public string GetPlanet()
     {
-        int rand = Random.Range(0, this.PlanetPointCtrl.PlanetFactory.PlanetList.Count);
-        return this.PlanetPointCtrl.PlanetFactory.PlanetList[rand];
+        int rand = Random.Range(0, this.PlanetList.Count);
+        return this.PlanetList[rand];
     }
 
 }

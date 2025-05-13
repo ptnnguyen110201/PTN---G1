@@ -16,6 +16,8 @@ public class PlanetStorage : IPlanetStorage
             this.ResourceMap[resourceType] = 0;
 
         this.ResourceMap[resourceType] += resourceCount;
+
+        
     }
 
     public int GetResourceCount(string resourceType)

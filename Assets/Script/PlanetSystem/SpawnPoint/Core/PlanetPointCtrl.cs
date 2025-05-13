@@ -4,8 +4,10 @@ using UnityEngine;
 public class PlanetPointCtrl : MonoBehaviour, IPoolable
 {
     [Inject] public IPlanetManager PlanetManager;
-    public IPlanetPointFactory PlanetFactory;
+    public IPlanetPointFactory PlanetPointFactory { get; protected set; }
 
+
+   
     public void OnDespawn()
     {
     }
@@ -13,8 +15,10 @@ public class PlanetPointCtrl : MonoBehaviour, IPoolable
     public void OnSpawn()
     {
         GameContext.Instance.Container.InjectInto(this);
-        this.PlanetFactory = new PlanetPointFactory();
-        this.PlanetFactory.Create(this);
+        this.PlanetPointFactory = new PlanetPointFactory();
+        this.PlanetPointFactory.Create(this);
+
+     
     }
 
 

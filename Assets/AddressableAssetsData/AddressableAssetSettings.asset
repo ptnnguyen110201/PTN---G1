@@ -15,7 +15,7 @@ MonoBehaviour:
   m_DefaultGroup: d73657e902f3f124cb0cb9489bf44724
   m_currentHash:
     serializedVersion: 2
-    Hash: 1b15d73f3eb55c1767745077ef7eabc0
+    Hash: 00000000000000000000000000000000
   m_OptimizeCatalogSize: 0
   m_BuildRemoteCatalog: 0
   m_CatalogRequestsTimeout: 0
@@ -103,7 +103,8 @@ MonoBehaviour:
     - ShipResource
     - ShipEnemy
     - Planet
-    - PlanetSpawnPoint
+    - PlanetPoint
+    - Station
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: 88e87c0b8c240f94a8a69a596c46360a, type: 2}
