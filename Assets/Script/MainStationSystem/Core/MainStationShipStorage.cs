@@ -6,15 +6,7 @@ public class MainStationShipStorage : IMainStationShipStorage
     public HashSet<string> ShipStorage { get; private set; } = new HashSet<string>()
     {
         "Ship1",
-        "Ship2",
-        "Ship3",
-        "Ship4",
-        "Ship5",
-        "Ship6",
-        "Ship7",
-        "Ship8",
-        "Ship9",
-        "Ship10"
+     
     };
     public int maxCount { get; private set; } = 3;
 

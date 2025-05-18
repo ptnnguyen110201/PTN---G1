@@ -1,14 +1,11 @@
 using UnityEngine;
 
-public class SubStationCtrl : MonoBehaviour, IPoolable
+public abstract class SubStationCtrl: MonoBehaviour, IPoolable
 {
-    public void OnDespawn()
-    {
-       
-    }
+    [Inject] protected IMainStationCtrl MainStationCtrl;
+    [Inject] protected ISubStationFactoryFactory SubStationFactoryFactory;
+  
+    public abstract void OnDespawn();
+    public abstract void OnSpawn();
 
-    public void OnSpawn()
-    {
-       
-    }
 }   

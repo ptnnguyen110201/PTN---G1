@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class PlanetCtrl : MonoBehaviour, IPoolable, IPointerDownHandler
+
 {   [Inject] IShipResourceSender ShipResourceSender;
     [Inject] IPlanetFactoryFactory PlanetFactoryFactory;
     public IPlanetFactory PlanetFactory;

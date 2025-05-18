@@ -1,0 +1,16 @@
+[
+    {
+        "ID": 1,
+        "Name": "Sub 1",
+        "PosX": 1,
+        "PosY": 1,
+        "PosZ": 0
+    },
+    {
+        "ID": 2,
+        "Name": "Sub 2",
+        "PosX": -1,
+        "PosY": 1,
+        "PosZ": 0
+    }
+]

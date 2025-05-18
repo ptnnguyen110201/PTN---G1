@@ -15,6 +15,18 @@ MonoBehaviour:
   m_GroupName: Prefabs
   m_GUID: ecae5b72250d97642b8071adcc16c079
   m_SerializeEntries:
+  - m_GUID: 221d150fe9911e84e86f497b92a9c7bc
+    m_Address: Assets/Prefabs/SubStation/Sub 2.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SubStation
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 589503ae01ad8d34fa6750b19812a820
+    m_Address: Assets/Prefabs/SubStation/Sub 1.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SubStation
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 5ad5acea5fc1b634aa46c1ae6bf9230a
     m_Address: Assets/Prefabs/PlanetSpawnPoint/PlanetSpawnPoint
     m_ReadOnly: 0
