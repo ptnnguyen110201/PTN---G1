@@ -1,7 +1,8 @@
 public enum PrefabType
 {
     None,
-    Station,
+    MainStation,
+    SubStation,
     ShipResource,
     ShipEnemy,
     Planet,

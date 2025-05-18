@@ -1,10 +1,12 @@
+using NUnit.Framework;
 using UnityEngine;
 
 public class MainStationCtrl : MonoBehaviour, IMainStationCtrl, IPoolable
 {
-    public Transform MainStationPos { get; private set; }
-    public IMainStation MainStation { get; private set; }
+    [Inject] public IMainStation MainStation;
+    public MainStationCtrl mainStationCtrl { get; private set; }
 
+    
     public void OnDespawn()
     {
      
@@ -12,10 +14,23 @@ public class MainStationCtrl : MonoBehaviour, IMainStationCtrl, IPoolable
 
     public void OnSpawn()
     {
-       
-        this.MainStationPos = this.transform;
-        this.MainStation = GameContext.Instance.Container.Resolve<IMainStation>();
+        GameContext.Instance.Container.InjectInto(this);
+        this.mainStationCtrl = this;
+
+    
+
     }
+    protected void Update()
+    {
+        foreach(var kvp in this.MainStation.MainStationStorage.ResourceMap) 
+        {
+            string resourceType = kvp.Key;
+            int amount = kvp.Value;
+            Debug.Log($"Resource Type: {resourceType}, Amount: {amount}");
+        }
+    }
+
+
 
 }
 

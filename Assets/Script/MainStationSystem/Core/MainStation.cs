@@ -37,7 +37,7 @@ public class MainStation : IMainStation, ISaveable
     {
         await this.MainStationPrefab.LoadPrefabs();
         await this.MainStationSpawner.SpawnMainStation();
-        Debug.Log("MainStation Initialized");
+        Debug.Log("MainStationManager Initialized");
     }
 
     public object CaptureData()

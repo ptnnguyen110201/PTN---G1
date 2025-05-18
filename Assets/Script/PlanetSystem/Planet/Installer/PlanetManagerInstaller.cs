@@ -7,6 +7,7 @@ public class PlanetManagerInstaller : GameSystemInstaller
     {
 
         container.Bind<IPlanetPrefabLoader, PlanetPrefabLoader>();
+        container.Bind<IPlanetFactoryFactory, PlanetFactoryFactory>();
         container.Bind<IPlanetSpawner, PlanetSpawner>();
         container.Bind<IPlanetManager, PlanetManager>();
         return Task.CompletedTask;

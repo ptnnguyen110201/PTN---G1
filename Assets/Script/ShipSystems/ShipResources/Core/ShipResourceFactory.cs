@@ -2,24 +2,32 @@ using UnityEngine;
 
 public class ShipResourceFactory : IShipResourceFactory
 {
+    public ShipResourceCtrl ObjT { get; private set; }
     public IStateMachine StateMachine { get; private set; }
-
-    public Transform TransferPos { get; private set; }
-
-    public Transform CollectPos { get; private set; }
-
-    public ShipResourceCtrl ObjT {  get; private set; }
+    public IShipResourceInventory ShipResourceInventory { get; private set; }
+    public IShipResourceLookat ShipResourceLookat { get; private set; }
 
     public void Create(ShipResourceCtrl ObjT)
     {
         this.ObjT = ObjT;
-        this.StateMachine = new StateMachine(ObjT);
+        this.StateMachine = new StateMachine(this.ObjT);
+        this.ShipResourceInventory = new ShipResourceInventory();
+        this.ShipResourceLookat = new ShipResourceLookat(this.ObjT);
+        this.StateMachine.SetState(() => new ShipResourceIdle(this.StateMachine, this.ObjT));
+
     }
 
-    public void Pos(Transform TransferPos, Transform CollectPos)
+    public void Destroy()
     {
-        this.TransferPos = TransferPos;
-        this.CollectPos = CollectPos;
+        if (this.ShipResourceLookat is IUpdatable ShipLookat)
+            UpdateInstaller.Instance.Unregister(ShipLookat);
 
+
+        this.StateMachine.StatePool.Clear(); 
+
+        this.ObjT = null;
+        this.StateMachine = null;
+        this.ShipResourceInventory = null;
+        this.ShipResourceLookat = null;
     }
 }

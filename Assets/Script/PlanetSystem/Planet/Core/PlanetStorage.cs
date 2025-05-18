@@ -2,9 +2,14 @@ using System.Collections.Generic;
 
 public class PlanetStorage : IPlanetStorage
 {
-    public Dictionary<string, int> ResourceMap {  get; set; } = new Dictionary<string, int>();
+    public Dictionary<string, int> ResourceMap { get; set; } = new Dictionary<string, int>()
+    {
+        {"Gold", 50 }
+    };
 
     public IPlanetFactory PlanetFactory { get; set; }
+
+  
 
     public PlanetStorage(IPlanetFactory IPlanetFactory) 
     {
@@ -16,8 +21,6 @@ public class PlanetStorage : IPlanetStorage
             this.ResourceMap[resourceType] = 0;
 
         this.ResourceMap[resourceType] += resourceCount;
-
-        
     }
 
     public int GetResourceCount(string resourceType)
@@ -25,11 +28,15 @@ public class PlanetStorage : IPlanetStorage
         if (!this.ResourceMap.ContainsKey(resourceType)) return 0;
         return this.ResourceMap[resourceType];
     }
-
     public void RemoveResource(string resourceType, int resourceCount)
     {
         if (!this.ResourceMap.ContainsKey(resourceType)) return;
         if (this.ResourceMap[resourceType] < resourceCount) return;
         this.ResourceMap[resourceType] -= resourceCount;
+
+        if (this.ResourceMap[resourceType] > 0) return;
+        this.ResourceMap.Remove(resourceType);
     }
+
+
 }

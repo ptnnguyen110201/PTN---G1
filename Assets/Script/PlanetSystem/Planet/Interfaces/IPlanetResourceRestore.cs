@@ -8,6 +8,5 @@ public interface IPlanetResourceRestore
     float RestoreTimer { get; }
     bool isPlanetRestore { get; }
     bool RestoreTiming(float deltaTime);
-
     void Restore();
 }

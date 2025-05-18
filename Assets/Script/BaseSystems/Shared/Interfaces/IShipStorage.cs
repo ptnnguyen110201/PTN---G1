@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-public interface IShipStorage
+public interface IShipResourceStorage
 {
     HashSet<string> ShipStorage { get; }
     void AddShip(string ShipID);

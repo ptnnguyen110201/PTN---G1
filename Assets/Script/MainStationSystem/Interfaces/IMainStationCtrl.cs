@@ -2,5 +2,5 @@ using UnityEngine;
 
 public interface IMainStationCtrl 
 {
-    Transform MainStationPos {  get; }
+    MainStationCtrl mainStationCtrl { get; }
 }

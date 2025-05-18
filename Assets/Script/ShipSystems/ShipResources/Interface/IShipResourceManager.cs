@@ -3,6 +3,7 @@ using UnityEngine;
 
 public interface IShipResourceManager : IInitializableSystem
 {
-    IShipResourcePrefabLoader ShipResourcePrefabLoader { get; }
+    IShipResourcePrefab ShipResourcePrefab { get; }
     IShipResourceSpawner ShipResourceSpawner { get; }
+    IShipResourceSender ShipResourceSender { get; }
 }

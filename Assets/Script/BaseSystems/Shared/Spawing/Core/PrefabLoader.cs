@@ -58,5 +58,8 @@ public abstract class PrefabLoader : IPrefabLoader
         }
     }
 
-   
+    public async Task Initialize()
+    {
+        await this.LoadPrefabs();
+    }
 }

@@ -1,9 +1,10 @@
 
+using System.Threading.Tasks;
 using UnityEngine;
 
-public interface ISpawner<T> where T : Component, IPoolable
+public interface ISpawner<T> : IInitializableSystem where T : Component, IPoolable
 {
-    void Preload(string prefabName, int preloadCount);
+    Task Preload(string prefabName, int preloadCount);
     T Spawn(string prefabName, Vector3 position, Quaternion rotation);
     void Despawn(T instance);
 }

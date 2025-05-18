@@ -21,6 +21,7 @@ public class MainStationCurrency : IMainStationCurrency
     {
         if (!this.CurrencyMap.ContainsKey(CurrencyType)) return;
         if (this.CurrencyMap[CurrencyType] < CurrencyCount) return;
+
         this.CurrencyMap[CurrencyType] -= CurrencyCount;
 
     }

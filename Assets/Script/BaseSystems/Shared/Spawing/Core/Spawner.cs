@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class Spawner<T> : ISpawner<T> where T : Component, IPoolable
@@ -27,7 +28,7 @@ public class Spawner<T> : ISpawner<T> where T : Component, IPoolable
         return holderTransform;
     }
 
-    public void Preload(string prefabName, int preloadCount)
+    public Task Preload(string prefabName, int preloadCount)
     {
         if (!this.poolDictionary.ContainsKey(prefabName))
         {
@@ -35,14 +36,14 @@ public class Spawner<T> : ISpawner<T> where T : Component, IPoolable
             if (prefabObject == null)
             {
                 Debug.LogError($"[Spawner] Failed to preload prefab: {prefabName}");
-                return;
+                return Task.CompletedTask;
             }
 
             T prefab = prefabObject.GetComponent<T>();
             if (prefab == null)
             {
                 Debug.LogError($"[Spawner] Prefab {prefabName} does not have component {typeof(T)}");
-                return;
+                return Task.CompletedTask;
             }
 
             Transform poolHolder = this.CreatePoolHolder();
@@ -50,6 +51,7 @@ public class Spawner<T> : ISpawner<T> where T : Component, IPoolable
         }
 
         this.poolDictionary[prefabName].Preload(preloadCount);
+        return Task.CompletedTask;
     }
 
     public T Spawn(string prefabName, Vector3 position, Quaternion rotation)
@@ -90,5 +92,8 @@ public class Spawner<T> : ISpawner<T> where T : Component, IPoolable
         }
     }
 
- 
+    public Task Initialize()
+    {
+        return Task.CompletedTask;
+    }
 }

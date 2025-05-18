@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 
-public interface IMainStationShipStorage : IShipStorage
+public interface IMainStationShipStorage : IShipResourceStorage
 {
+    string GetShip(string ShipID);
     bool IsMaxShip();
-    HashSet<string> ExportAll();
-
     int maxCount { get; }
-    void LoadFrom(HashSet<string> ships);
+    void LoadFrom(HashSet<string> ships); 
+    HashSet<string> ExportAll();
 }

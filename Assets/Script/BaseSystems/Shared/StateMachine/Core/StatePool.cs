@@ -1,27 +1,25 @@
 using System;
 using System.Collections.Generic;
 
-public class StatePool : IStatePool
+public class StatePool
 {
-    public Dictionary<Type, IState> PooledStates { get; private set; }
-    public StatePool (Dictionary<Type, IState> pooledStates) 
-    {
-        this.PooledStates = pooledStates;
-    }
+    private readonly Dictionary<Type, IState> cache = new();
 
-    public T GetState<T>(Func<T> createState) where T : IState
+    public T GetState<T>(Func<T> createFunc = null) where T : IState
     {
         Type type = typeof(T);
 
-        if (!this.PooledStates.ContainsKey(type))
+        if (!this.cache.TryGetValue(type, out IState state))
         {
-            this.PooledStates[type] = createState();
+            if (createFunc == null)
+                throw new Exception($"State of type {type} not created yet and no createFunc provided.");
+
+            state = createFunc();
+            this.cache[type] = state;
         }
 
-        return (T)this.PooledStates[type];
+        return (T)state;
     }
-    public void Clear()
-    {
-        this.PooledStates.Clear();
-    }
+
+    public void Clear() => cache.Clear();
 }

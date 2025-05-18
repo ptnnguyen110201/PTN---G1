@@ -7,6 +7,7 @@ public class PlanetPointInstaller : GameSystemInstaller
     {
         container.Bind<IPlanetPointPosReader, PlanetPointPosReader>();
         container.Bind<IPlanetPointPrefab, PlanetPointPrefab>();
+        container.Bind<IPlanetPointFactoryFactory, PlanetPointFactoryFactory>();
         container.Bind<IPlanetPointSpawner, PlanetPointSpawner>();
         container.Bind<IPlanetPointManager, PlanetPointManager>();
         return Task.CompletedTask;

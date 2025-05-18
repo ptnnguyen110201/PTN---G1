@@ -37,7 +37,7 @@ MonoBehaviour:
     m_Address: Assets/Prefabs/MainStation/MainStation
     m_ReadOnly: 0
     m_SerializedLabels:
-    - Station
+    - MainStation
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: cf91903cb5ae0534b8ae9210b6763875
     m_Address: Assets/Prefabs/Ship/ShipResource1
