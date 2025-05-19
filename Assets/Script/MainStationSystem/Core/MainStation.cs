@@ -46,7 +46,7 @@ public class MainStation : IMainStation, ISaveable
         {
             currentLevel = MainStationLevel.CurrentLevel,
             resourceMap = MainStationStorage.ExportAll(),
-            shipValue = MainStationShipStorage.ExportAll(),
+            shipStorage = MainStationShipStorage.ExportAll(),
 
         };
     }
@@ -58,6 +58,6 @@ public class MainStation : IMainStation, ISaveable
 
         this.MainStationLevel.SetLevel(stationData.currentLevel, stationData.maxLevel);
         this.MainStationStorage.LoadFrom(stationData.resourceMap);
-        this.MainStationShipStorage.LoadFrom(stationData.shipValue);
+        this.MainStationShipStorage.LoadFrom(stationData.shipStorage);
     }
 }

@@ -5,6 +5,6 @@ public interface IMainStationShipStorage : IShipResourceStorage
     string GetShip(string ShipID);
     bool IsMaxShip();
     int maxCount { get; }
-    void LoadFrom(HashSet<string> ships); 
-    HashSet<string> ExportAll();
+    void LoadFrom(Dictionary<string, int> ships);
+    Dictionary<string, int> ExportAll();
 }

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public abstract class ShipLookat<T> : IShipLookat<T> where T : ShipCtrl<T>
+public abstract class ShipLookat<T> : IShipLookat<T> where T : ShipCtrl
 {
     public T ShipObj { get; private set; }
     public ShipLookat(T shipObj)

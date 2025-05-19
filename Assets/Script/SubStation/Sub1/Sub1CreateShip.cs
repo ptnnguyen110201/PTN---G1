@@ -22,7 +22,7 @@ public class Sub1CreateShip : ICreateShip, IUpdatable
     public void CreateShip()
     {
         int randID = Random.Range(1, 1000);
-        this.MainStation.MainStationShipStorage.AddShip(randID.ToString());
+        this.MainStation.MainStationShipStorage.AddShip();
     }
 
     public void OnUpdate(float deltaTime)

@@ -15,7 +15,7 @@ public class ShipResourceIdle : ShipResourceState, IShipResourceIdle
 
         if (this.IsPlanetDepleted)
         {
-            this.ShipObj.DespawnSelf();
+            this.ShipObj.ShipResourceFactory.ShipResourceSpanwer.Despawn(this.ShipObj);
             yield break;
         }
 

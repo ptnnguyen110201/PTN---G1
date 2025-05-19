@@ -6,6 +6,6 @@ public class MainStationData
     public int currentLevel;
     public int maxLevel = 1000;
     public Dictionary<string, int> resourceMap;
-    public HashSet<string> shipValue;
+    public Dictionary<string, int> shipStorage;
 
 }

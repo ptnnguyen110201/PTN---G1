@@ -1,5 +1,11 @@
+using System;
+
 public interface ISubStationFactoryFactory
 {
-    ISubStationFactory CreateFactory( SubStationCtrl SubStation);
-    void ReleaseFactory(ISubStationFactory SubStationFactory, SubStationCtrl subStation);
+    TFactory CreateFactory<TStation, TFactory>(TStation station)
+         where TStation : SubStationCtrl
+         where TFactory : class, ISubStationFactory, new();
+
+    void ReleaseFactory(ISubStationFactory factory, SubStationCtrl station);
+    void RegisterFactoryCreator<TStation>(Func<ISubStationFactory> creator) where TStation : SubStationCtrl;
 }

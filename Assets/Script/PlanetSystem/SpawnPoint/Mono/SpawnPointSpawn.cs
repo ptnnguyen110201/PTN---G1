@@ -13,7 +13,7 @@ public class SpawnPointSpawn : MonoBehaviour
     protected void Test()
     {
         GameContext.Instance.Container.InjectInto(this);
-        MainStation.MainStationShipStorage.AddShip("Ship1");
+        MainStation.MainStationShipStorage.AddShip();
 
 
     }

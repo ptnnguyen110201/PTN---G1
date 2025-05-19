@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 public interface IShipResourceStorage
 {
-    HashSet<string> ShipStorage { get; }
-    void AddShip(string ShipID);
+    Dictionary<string, int> ShipStorage { get; }
+    void AddShip();
     void RemoveShip(string ShipID);   
 }

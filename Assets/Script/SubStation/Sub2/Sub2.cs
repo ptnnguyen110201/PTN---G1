@@ -12,7 +12,7 @@ public class Sub2 : SubStationCtrl
     public override void OnSpawn()
     {
         GameContext.Instance.Container.InjectInto(this);
-        this.Sub2IFacotry = this.SubStationFactoryFactory.CreateFactory(this) as Sub2IFacotry;
+        this.Sub2IFacotry = this.SubStationFactoryFactory.CreateFactory<Sub2, Sub2Factory>(this);
 
     }
 

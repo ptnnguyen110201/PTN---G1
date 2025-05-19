@@ -1,15 +1,16 @@
 using UnityEngine;
 
-public abstract class ShipCtrl<T> : MonoBehaviour, IPoolable where T : ShipCtrl<T>
+public abstract class ShipCtrl : MonoBehaviour, IPoolable
 {
-    protected ISpawner<T> Spawner { get; private set; }
-    public void InjectSpawner(ISpawner<T> spawner) => this.Spawner = spawner; 
-    public void DespawnSelf()
+    [Inject] protected IShipFactoryFactory ShipFactoryFactory;
+    protected TShipFactory CreateFactory<TShipCtrl, TShipFactory>(TShipCtrl ShipCtrl)
+   where TShipCtrl : ShipCtrl
+   where TShipFactory : class, IShipFactory, new()
     {
-        this.Spawner.Despawn(this as T);
+        return this.ShipFactoryFactory.CreateFactory<TShipCtrl, TShipFactory>(ShipCtrl);
     }
     public abstract void OnSpawn();
     public abstract void OnDespawn();
 
-   
+
 }

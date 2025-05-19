@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShipResourceCtrl : ShipCtrl<ShipResourceCtrl>
+public class ShipResourceCtrl : ShipCtrl
 {
-    [Inject] IShipResourceFactoryFactory ShipResourceFactoryFactory;  
     public IShipResourceFactory ShipResourceFactory { get; private set; }
     public Dictionary<string, int> ResourceCollect { get; private set; } = new Dictionary<string, int>()
     {
@@ -15,7 +14,7 @@ public class ShipResourceCtrl : ShipCtrl<ShipResourceCtrl>
 
     public override void OnDespawn()
     {
-        this.ShipResourceFactoryFactory.ReleaseFactory(this.ShipResourceFactory);
+        this.ShipFactoryFactory.ReleaseFactory(this.ShipResourceFactory, this);
         this.ShipResourceFactory = null;
        
     }
@@ -23,7 +22,7 @@ public class ShipResourceCtrl : ShipCtrl<ShipResourceCtrl>
     public override void OnSpawn()
     {
         GameContext.Instance.Container.InjectInto(this);
-        this.ShipResourceFactory = this.ShipResourceFactoryFactory.CreateFactory(this);
+        this.ShipResourceFactory = this.CreateFactory<ShipResourceCtrl, ShipResourceFactory>(this);
     }
 
 
