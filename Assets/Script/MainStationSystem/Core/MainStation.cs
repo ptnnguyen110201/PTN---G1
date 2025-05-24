@@ -10,8 +10,9 @@ public class MainStation : IMainStation, ISaveable
     public IMainStationCurrency MainStationCurrency { get; private set; }
     public IMainStationPrefab MainStationPrefab { get; private set; }
     public IMainStationSpawner MainStationSpawner { get; private set; }
-
+    public ISaveRegistry SaveRegistry { get; private set; }
     public string SaveKey => "MainStation";
+
 
 
     public MainStation(
@@ -21,7 +22,8 @@ public class MainStation : IMainStation, ISaveable
         IMainStationShipStorage mainStationShipStorage,
         IMainStationCurrency mainStationCurrency,
         IMainStationPrefab mainStationPrefab,
-        IMainStationSpawner mainStationSpawner
+        IMainStationSpawner mainStationSpawner,
+        ISaveRegistry saveRegistry
         )
     {
         this.MainStationLevel = mainStationLevel;
@@ -31,12 +33,15 @@ public class MainStation : IMainStation, ISaveable
         this.MainStationCurrency = mainStationCurrency;
         this.MainStationPrefab = mainStationPrefab;
         this.MainStationSpawner = mainStationSpawner;
+        this.SaveRegistry = saveRegistry;
     }
 
     public async Task Initialize()
     {
         await this.MainStationPrefab.LoadPrefabs();
         await this.MainStationSpawner.SpawnMainStation();
+        this.SaveRegistry.Register(this);
+
         Debug.Log("MainStationManager Initialized");
     }
 

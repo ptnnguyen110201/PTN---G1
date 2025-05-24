@@ -16,19 +16,8 @@ public class MainStationCtrl : MonoBehaviour, IMainStationCtrl, IPoolable
     {
         GameContext.Instance.Container.InjectInto(this);
         this.mainStationCtrl = this;
-
-    
-
     }
-    protected void Update()
-    {
-        foreach(var kvp in this.MainStation.MainStationStorage.ResourceMap) 
-        {
-            string resourceType = kvp.Key;
-            int amount = kvp.Value;
-            Debug.Log($"Resource Type: {resourceType}, Amount: {amount}");
-        }
-    }
+   
 
 
 

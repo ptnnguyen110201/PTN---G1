@@ -15,6 +15,8 @@ public class PlanetCtrl : MonoBehaviour, IPoolable, IPointerDownHandler
     public void OnPointerDown(PointerEventData eventData)
     {
         this.ShipResourceSender.SendShip("Ship1", this.transform);
+        this.ShipResourceSender.SendShip("Ship2", this.transform);
+        this.ShipResourceSender.SendShip("Ship3", this.transform);
     }
 
     public void OnSpawn()

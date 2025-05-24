@@ -39,11 +39,21 @@ MonoBehaviour:
     m_SerializedLabels:
     - Planet
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b07375a686decb94abf22a664b5df71c
+    m_Address: Assets/DataSystem/PlanetPointPos.json
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: b48aa109b0eb1f94ab691e38be8fe378
     m_Address: Assets/Prefabs/Enemy/Enemy1
     m_ReadOnly: 0
     m_SerializedLabels:
     - ShipEnemy
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c791ee03f903af549bc7b9c5b02a3ac0
+    m_Address: Assets/DataSystem/ResourceShipInfo.json
+    m_ReadOnly: 0
+    m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: ca12ac3d2f067504ab9d601631a8d352
     m_Address: Assets/Prefabs/MainStation/MainStation
@@ -68,6 +78,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - ShipResource
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fa7e3197d7e86db448a6c27b566fbddf
+    m_Address: Assets/DataSystem/SubStationPos.json
+    m_ReadOnly: 0
+    m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 5e56ed486630b3240848acf192d15545, type: 2}

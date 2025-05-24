@@ -11,4 +11,5 @@ public interface IMainStation : IInitializableSystem
     public IMainStationUpgarde MainStationUpgarde { get; }
     public IMainStationShipStorage MainStationShipStorage { get; }
     public IMainStationCurrency MainStationCurrency { get; }
+    public ISaveRegistry SaveRegistry { get; }
 }

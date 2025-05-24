@@ -1,0 +1,17 @@
+{
+  "KeyValues": {
+    "MainStation": {
+      "$type": "MainStationData, Assembly-CSharp",
+      "currentLevel": 1,
+      "maxLevel": 1000,
+      "resourceMap": {
+        "Gold": 122
+      },
+      "shipStorage": {
+        "Ship1": 1,
+        "Ship2": 2,
+        "Ship3": 3
+      }
+    }
+  }
+}

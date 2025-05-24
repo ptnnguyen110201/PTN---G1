@@ -10,16 +10,19 @@ public class ShipResourceSender : IShipResourceSender
     public IMainStationShipStorage MainStationShipStorage { get; private set; }
     public IShipResourceSpawner ShipResourceSpawner { get; private set; }
 
+    public IShipResourceInfoReader ShipResourceInfoReader { get; private set; }
 
     public ShipResourceSender(
         IMainStationShipStorage MainStationShipStorage,
         IShipResourceSpawner ShipResourceSpawner,
-        IMainStationCtrl MainStationCtrl
+        IMainStationCtrl MainStationCtrl,
+        IShipResourceInfoReader ShipResourceInfoReader
         )
     {
         this.MainStationShipStorage = MainStationShipStorage;
         this.ShipResourceSpawner = ShipResourceSpawner;
         this.MainStationCtrl = MainStationCtrl;
+        this.ShipResourceInfoReader = ShipResourceInfoReader;
     }
 
     public Task Initialize()
@@ -30,8 +33,10 @@ public class ShipResourceSender : IShipResourceSender
 
     public void SendShip(string ShipID, Transform CollectPos)
     {
-        string shipID = this.MainStationShipStorage.GetShip(ShipID);
-        if (shipID == string.Empty) return;
+        int shipLevel = this.MainStationShipStorage.GetShip(ShipID);
+        if (shipLevel == 0) return;
+
+        ShipResourceData shipResourceData = this.ShipResourceInfoReader.GetShipResourceData(shipLevel);
 
         Transform TransferPos = this.MainStationCtrl.mainStationCtrl.transform;
 
@@ -41,7 +46,7 @@ public class ShipResourceSender : IShipResourceSender
                 TransferPos.transform.position,
                 Quaternion.identity
             );
-
+        ShipResource.SetShipResourceData(shipResourceData);
         ShipResource.SetPos(TransferPos, CollectPos);
         this.ShipSended.Add(ShipID);
 

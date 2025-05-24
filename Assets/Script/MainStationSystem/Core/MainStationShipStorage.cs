@@ -5,9 +5,11 @@ public class MainStationShipStorage : IMainStationShipStorage
 {
     public Dictionary<string, int> ShipStorage { get; private set; } = new Dictionary<string, int>
     {
-        {"Ship1", 1 },
-
+        { "Ship1", 1 },
+        { "Ship2", 2 },
+        { "Ship3", 3 },
     };
+
 
     protected string shipID = "Ship";
     public int maxCount { get; private set; } = 3;
@@ -26,12 +28,6 @@ public class MainStationShipStorage : IMainStationShipStorage
         }
 
         this.ShipStorage[newID] = 1;
-
-
-        foreach(var ShipValue in this.ShipStorage) 
-        {
-            Debug.Log($"ShipID: {ShipValue.Key}, ShipCount: {ShipStorage.Count}");
-        }
     }
 
     public void RemoveShip(string ShipID)
@@ -39,10 +35,12 @@ public class MainStationShipStorage : IMainStationShipStorage
         if (!this.ShipStorage.ContainsKey(shipID)) return;
         this.ShipStorage.Remove(ShipID);
     }
-    public string GetShip(string ShipID)
+    public int GetShip(string shipID)
     {
-        if (!this.ShipStorage.ContainsKey(ShipID)) return string.Empty;
-        return ShipID;
+        if (!this.ShipStorage.TryGetValue(shipID, out int level))
+            return 0; 
+
+        return level;
     }
 
     public bool IsMaxShip() => this.ShipStorage.Count >= this.maxCount;

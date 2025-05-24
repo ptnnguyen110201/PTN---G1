@@ -12,7 +12,7 @@ public class ShipResourceCollect : ShipResourceState, IShipResourceCollect
     public override IEnumerator OnEnter()
     {
         this.CollectPlanet = this.ShipObj.CollectPos.GetComponent<PlanetCtrl>();
-        this.ResourceCollect = new Dictionary<string, int>(this.ShipObj.ResourceCollect);
+        this.ResourceCollect = new Dictionary<string, int>(this.ShipObj.ShipResourceData.Resources);
         yield break;
     }
 

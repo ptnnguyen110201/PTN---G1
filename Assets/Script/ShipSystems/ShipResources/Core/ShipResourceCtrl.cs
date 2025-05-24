@@ -4,11 +4,8 @@ using UnityEngine;
 
 public class ShipResourceCtrl : ShipCtrl
 {
+    [SerializeField] public ShipResourceData ShipResourceData;
     public IShipResourceFactory ShipResourceFactory { get; private set; }
-    public Dictionary<string, int> ResourceCollect { get; private set; } = new Dictionary<string, int>()
-    {
-        {"Gold", 5 }
-    };
     public Transform TransferPos { get; private set; }
     public Transform CollectPos { get; private set; }
 
@@ -29,7 +26,8 @@ public class ShipResourceCtrl : ShipCtrl
 
 
 
-    public void SetResourceCollect(Dictionary<string, int> ResourceCollect) => this.ResourceCollect = new(ResourceCollect);
+    public void SetShipResourceData(ShipResourceData shipResourceData) => this.ShipResourceData = shipResourceData;
+
 
     public void SetPos(Transform TransferPos, Transform CollectPos)
     {

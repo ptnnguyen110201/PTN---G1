@@ -1,15 +1,40 @@
 using Newtonsoft.Json;
 using System.Collections.Generic;
-using System.IO;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
 
 public abstract class JsonObjectReader : IJsonObjectReader
 {
     protected Dictionary<string, object> Data;
+    protected List<Dictionary<string, object>> RawList; 
 
-    protected abstract string JsonPath();
-    public abstract Task LoadPath();
+    protected abstract string AddressableKey();
+
+    public virtual async Task LoadPath()
+    {
+        AsyncOperationHandle<TextAsset> handle = Addressables.LoadAssetAsync<TextAsset>(this.AddressableKey());
+        await handle.Task;
+
+        if (handle.Status != AsyncOperationStatus.Succeeded)
+        {
+            Debug.LogError($"[JsonObjectReader] Failed to load JSON with key: {this.AddressableKey()}");
+            return;
+        }
+
+        string jsonContent = handle.Result.text;
+        this.RawList = JsonConvert.DeserializeObject<List<Dictionary<string, object>>>(jsonContent);
+
+        if (this.RawList == null || this.RawList.Count == 0)
+        {
+            Debug.LogWarning($"[JsonObjectReader] No data found in JSON: {this.AddressableKey()}");
+            return;
+        }
+
+        this.Data = this.RawList[0];
+        Addressables.Release(handle);
+    }
 
     public void SetRow(Dictionary<string, object> rowData)
     {
@@ -18,11 +43,13 @@ public abstract class JsonObjectReader : IJsonObjectReader
 
     public void SetRow(int index)
     {
-        string jsonContent = File.ReadAllText(this.JsonPath());
-        var rawList = JsonConvert.DeserializeObject<List<Dictionary<string, object>>>(jsonContent);
-        if (rawList != null && index < rawList.Count)
+        if (this.RawList != null && index >= 0 && index < this.RawList.Count)
         {
-            this.Data = rawList[index];
+            this.Data = this.RawList[index];
+        }
+        else
+        {
+            Debug.LogWarning($"[JsonObjectReader] Invalid index: {index}");
         }
     }
 

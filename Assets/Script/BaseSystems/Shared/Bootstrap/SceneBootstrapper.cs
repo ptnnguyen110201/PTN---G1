@@ -21,6 +21,7 @@ public class SceneBootstrapper : MonoBehaviour
         }
 
         await this.bootstrapper?.Initialize();
+        
     }
 
 

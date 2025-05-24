@@ -5,7 +5,9 @@ public class PlanetPointManager : IPlanetPointManager
 {
     public IPlanetPointPrefab PlanetPointPrefab {  get; private set; }
     public IPlanetPointSpawner PlanetPointSpawner { get; private set; }
-    public IPlanetPointPosReader PlanetPointPosReader { get; private set; } 
+    public IPlanetPointPosReader PlanetPointPosReader { get; private set; }
+
+    public string SaveKey => "PlanetPointManager";
 
     public PlanetPointManager(
         IPlanetPointPrefab PlanetPointPrefab,
@@ -26,5 +28,15 @@ public class PlanetPointManager : IPlanetPointManager
         await this.PlanetPointSpawner.SpawnPlanetPoint();
         Debug.Log("PlanetPointManager Initialized");
 
+    }
+
+    public object CaptureData()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void RestoreData(object data)
+    {
+        throw new System.NotImplementedException();
     }
 }

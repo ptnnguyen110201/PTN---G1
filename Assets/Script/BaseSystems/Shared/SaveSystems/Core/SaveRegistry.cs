@@ -1,19 +1,20 @@
 using System.Collections.Generic;
 
-public static class SaveRegistry
+public class SaveRegistry : ISaveRegistry
 {
-    private static readonly List<ISaveable> saveables = new();
+    protected List<ISaveable> saveables = new();
 
-    public static void Register(ISaveable saveable)
+    public void Register(ISaveable saveable)
     {
-        if (!saveables.Contains(saveable))
-            saveables.Add(saveable);
+        if (this.saveables.Contains(saveable)) return;
+            this.saveables.Add(saveable);
     }
 
-    public static void Unregister(ISaveable saveable)
+    public void Unregister(ISaveable saveable)
     {
-        saveables.Remove(saveable);
+        if (!this.saveables.Contains(saveable)) return;
+            this.saveables.Remove(saveable);
     }
 
-    public static List<ISaveable> GetAll() => saveables;
+    public List<ISaveable> GetAll() => this.saveables;
 }

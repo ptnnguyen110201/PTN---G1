@@ -1,0 +1,38 @@
+[
+    {
+        "ShipType": "ShipResource",
+        "Level": 1,
+        "Resource": "Gold",
+        "Count": 5
+    },
+    {
+        "ShipType": "ShipResource",
+        "Level": 2,
+        "Resource": "Gold",
+        "Count": 6
+    },
+    {
+        "ShipType": "ShipResource",
+        "Level": 3,
+        "Resource": "Gold",
+        "Count": 7
+    },
+    {
+        "ShipType": "ShipResource",
+        "Level": 4,
+        "Resource": "Gold",
+        "Count": 8
+    },
+    {
+        "ShipType": "ShipResource",
+        "Level": 5,
+        "Resource": "Gold",
+        "Count": 9
+    },
+    {
+        "ShipType": "ShipResource",
+        "Level": 6,
+        "Resource": "Gold",
+        "Count": 10
+    }
+]
